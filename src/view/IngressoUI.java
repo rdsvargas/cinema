@@ -73,7 +73,7 @@ public class IngressoUI {
                 System.out.println(String.format("%-10s", ingresso.getIngressosVendidos()) +
                         String.format("%-8s", ingresso.getSessao().getHora()) + 
                         String.format("%-30s", ingresso.getSessao().getFilme().getNome()) +
-                        String.format("%-15s", ingresso.getSessao().getSala().getQtdAssentos() - ingresso.getIngressosVendidos()));
+                        String.format("%-15s", ingresso.getSessao().getQtdAssentos() - ingresso.getIngressosVendidos()));
             }
         }
     }

@@ -24,7 +24,7 @@ public class RepositorioIngressos {
         boolean result = false;
         for (Ingresso ingresso : ingressos) {
             if (ingresso.getSessao().getHora() == hora){
-                if (ingresso.getIngressosVendidos() < ingresso.getSessao().getSala().getQtdAssentos()){
+                if (ingresso.getIngressosVendidos() < ingresso.getSessao().getQtdAssentos()){
                     ingresso.incrementaIngresso();
                     result = true;
                 } else {
