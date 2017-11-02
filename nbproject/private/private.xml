@@ -3,7 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Senac/NetBeans/2017_2/Cinema/src/model/Filme.java</file>
+            <file>file:/E:/Senac/NetBeans/2017_2/Cinema/src/dao/DaoMain.java</file>
+            <file>file:/E:/Senac/NetBeans/2017_2/Cinema/src/negocio/FilmeNegocio.java</file>
+            <file>file:/E:/Senac/NetBeans/2017_2/Cinema/src/view/FilmeUI.java</file>
+            <file>file:/E:/Senac/NetBeans/2017_2/Cinema/src/dao/db/FilmeDaoBd.java</file>
+            <file>file:/E:/Senac/NetBeans/2017_2/Cinema/src/dao/db/ConnectionFactory.java</file>
         </group>
     </open-files>
 </project-private>

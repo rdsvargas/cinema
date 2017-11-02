@@ -7,33 +7,20 @@ public class Filme {
     private String genero;
     private String sinopsia;
 
-    public Filme(int codigo, String nome, String genero, String sinopsia) throws Exception {
-        // validação dos dados informados
-        this.validaData(codigo, "Código", 0);
-        this.validaData(nome, "Filme", 30);
-        this.validaData(genero, "Gênero", 20);
-        this.validaData(sinopsia, "Sinópsia", 50);
-
+    public Filme(int codigo, String nome, String genero, String sinopsia) { // throws Exception {
         this.codigo = codigo;
         this.nome = nome;
         this.genero = genero;
         this.sinopsia = sinopsia;
     }
 
-    private void validaData(Object data, String desc, int size) throws Exception {
-        if (data instanceof String) {
-            if (((String) data).length() > size) {
-                throw new Exception(desc + " não pode ser maior que " + size +" caracteres.");
-            } else if (((String) data).isEmpty()) {
-                throw new Exception(desc + " inválido.");
-            }
-        } else {
-            if ((int) data <= 0) {
-                throw new Exception(desc + " inválido");
-            }
-        }
-    }
+    public Filme(String nome, String genero, String sinopsia) {
 
+        this.nome = nome;
+        this.genero = genero;
+        this.sinopsia = sinopsia;
+    }
+    
     public int getCodigo() {
         return codigo;
     }

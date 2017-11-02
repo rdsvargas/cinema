@@ -1,3 +1,4 @@
+package dao.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,19 +11,25 @@ import java.util.logging.Logger;
  * @author Roger
  */
 public class ConnectionFactory {
+    private final static String HOST = "localhost";
+    private final static String PORT = "5432";
+    private final static String BD = "lp2_crudcinema";
+    private final static String URL = "jdbc:postgresql://"+HOST+":"+PORT+"/"+BD;
+    private final static String USUARIO = "postgres";
+    private final static String SENHA = "rl";
 
     public static Connection getConnection(){
         Connection conexao = null;
         try{
             Class.forName("org.postgresql.Driver");
-            conexao = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/lp2_crudcinema",
-                    "postgres", "rl");
+            conexao = DriverManager.getConnection(URL, USUARIO, SENHA);
             
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Erro de Sistema - Classe do Driver Nao Encontrada!");
+            throw new RuntimeException(ex);
         } catch (SQLException ex) {
-            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Erro de Sistema - Problema na conexão do banco de dados");
+            throw new RuntimeException(ex);
         }
         return conexao;
     }
