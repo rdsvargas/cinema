@@ -1,25 +1,26 @@
 package view;
 
-import repositorio.RepositorioSessoes;
-import repositorio.RepositorioSalas;
-import repositorio.RepositorioFilmes;
 import view.menu.SessaoMenu;
 import java.time.LocalTime;
+import java.util.List;
 import model.Filme;
 import model.Sala;
 import model.Sessao;
+import negocio.FilmeNegocio;
+import negocio.SalaNegocio;
+import negocio.SessaoNegocio;
 import util.Console;
 
 public class SessaoUI {
 
-    private RepositorioSessoes lista;
-    private RepositorioFilmes listaFilmes;
-    private RepositorioSalas listaSalas;
+    private SessaoNegocio sessaoNegocio;
+    private FilmeNegocio filmeNegocio;
+    private SalaNegocio salaNegocio;
 
-    public SessaoUI(RepositorioSessoes lista, RepositorioFilmes listaFilmes, RepositorioSalas listaSalas) {
-        this.lista = lista;
-        this.listaFilmes = listaFilmes;
-        this.listaSalas = listaSalas;
+    public SessaoUI() {
+        sessaoNegocio = new SessaoNegocio();
+        filmeNegocio = new FilmeNegocio();
+        salaNegocio = new SalaNegocio();
     }
 
     public void executar() {
@@ -30,6 +31,9 @@ public class SessaoUI {
             switch (opcao) {
                 case SessaoMenu.OP_CADASTRAR:
                     cadastrarSessao();
+                    break;
+                case SessaoMenu.OP_ALTERAR:
+                    alterarSessao();
                     break;
                 case SessaoMenu.OP_LISTAR:
                     listarSessoes();
@@ -43,25 +47,45 @@ public class SessaoUI {
     }
 
     private void cadastrarSessao() {
-        String msgError = "";
-        LocalTime hora = Console.scanTime("Informe hora da Sessão (hh:mm): ");
-        msgError = hora == null ? "Hora informada inválida.\n" : "";
+        try {
+            LocalTime hora = Console.scanTime("Informe hora da Sessão (hh:mm): ");
+            Filme filme = filmeNegocio.localizarPorId(Console.scanInt("Informe o Código do filme: "));
+            Sala sala = salaNegocio.localizarPorCodigo(Console.scanString("Identificação Sala: "));
 
-        Filme filme = listaFilmes.buscarFilmePorCodigo(Console.scanInt("Informe o código do Filme: "));
-        msgError = filme == null ? msgError + "Filme informado inválido.\n" : msgError;
+            Sessao sessao = new Sessao(hora, sala, filme);
+            sessaoNegocio.salvar(sessao);
+            System.out.println(sessao.toString() + " -> cadastrada com sucesso!");
+        } catch (Exception ex) {
+            UIUtil.mostrarErro(ex.getMessage());
+        }
+    }
 
-        Sala sala = listaSalas.buscarSala(Console.scanInt("Informe o número da Sala: "));
-        msgError = sala == null ? msgError + "Sala informada inválida." : msgError;
-        if (msgError.isEmpty()) {
-            lista.addSessao(new Sessao(hora, sala, filme));
-        } else {
-            System.out.println(msgError);
+    private void alterarSessao() {
+        try {
+            LocalTime hora = Console.scanTime("Informe hora da Sessão (hh:mm): ");
+            String sala_codigo = Console.scanString("Identificação Sala: ");
+
+            Sessao sessao = sessaoNegocio.localizarPorHorario(hora, sala_codigo);
+            System.out.println(sessao.toString() + "\n");
+            
+            hora = Console.scanTime("Informe novo horário da Sessão (hh:mm): ");
+            int filme_id = Console.scanInt("Informe novo Filme: ");
+            
+            Filme filme = filmeNegocio.localizarPorId(filme_id);
+            sessao.setHora(hora);
+            sessao.setFilme(filme);
+            
+            sessaoNegocio.atualizar(sessao);
+            System.out.println("\n" + sessao.toString());
+        } catch (Exception ex) {
+            UIUtil.mostrarErro(ex.getMessage());
         }
     }
 
     public void listarSessoes() {
-        for (Sessao sessao : lista.getListaSessoes()) {
-            System.out.println(sessao.getHora() + " -" + sessao.getFilme().getNome() + " - " + sessao.getSala().getNumeroSala());
+        List<Sessao> listaSessoes = sessaoNegocio.listar();
+        for (Sessao sessao : listaSessoes) {
+            System.out.println(sessao.toString());
         }
     }
 }

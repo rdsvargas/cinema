@@ -44,7 +44,7 @@ public class RepositorioFilmes {
 
     public Filme buscarFilmePorCodigo(int codigo) {
         for (Filme filme : filmes) {
-            if (filme.getCodigo() == codigo) {
+            if (filme.getId() == codigo) {
                 return filme;
             }
         }

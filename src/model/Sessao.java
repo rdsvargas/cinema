@@ -8,10 +8,12 @@ import java.time.LocalTime;
  */
 public class Sessao {
 
+    private int id;
     private LocalTime hora;
     private Sala sala;
     private Filme filme;
     private int qtdAssentos;
+    private int ingressos_vendidos;
 
     public Sessao(LocalTime hora, Sala sala, Filme filme) {
         this.hora = hora;
@@ -20,8 +22,17 @@ public class Sessao {
         this.qtdAssentos = sala.getQtdAssentos();
     }
 
+    public Sessao(int id, LocalTime hora, Sala sala, Filme filme, int ingressos_vendidos) {
+        this.id = id;
+        this.hora = hora;
+        this.sala = sala;
+        this.filme = filme;
+        this.qtdAssentos = sala.getQtdAssentos();
+        this.ingressos_vendidos = ingressos_vendidos;
+    }
+
     public LocalTime getHora() {
-        return hora;
+        return this.hora;
     }
 
     public void setHora(LocalTime hora) {
@@ -37,7 +48,7 @@ public class Sessao {
     }
 
     public Filme getFilme() {
-        return filme;
+        return this.filme;
     }
 
     public void setFilme(Filme filme) {
@@ -52,4 +63,25 @@ public class Sessao {
         this.qtdAssentos = qtdAssentos;
     }
 
+    public int getId(){
+        return this.id;
+    }
+    
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public int getIngressos_vendidos() {
+        return this.ingressos_vendidos;
+    }
+
+    public void setIngressos_vendidos(int ingressos_vendidos) {
+        this.ingressos_vendidos = ingressos_vendidos;
+    }
+
+    @Override
+    public String toString() {
+        return "Sessao{" + "id=" + id + ", hora=" + hora + ", sala=" + sala + ", filme=" + filme + ", qtdAssentos=" + qtdAssentos + '}';
+    }
+    
 }

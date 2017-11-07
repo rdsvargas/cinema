@@ -2,13 +2,13 @@ package model;
 
 public class Filme {
 
-    private int codigo;
+    private int id;
     private String nome;
     private String genero;
     private String sinopsia;
 
-    public Filme(int codigo, String nome, String genero, String sinopsia) { // throws Exception {
-        this.codigo = codigo;
+    public Filme(int id, String nome, String genero, String sinopsia) { // throws Exception {
+        this.id = id;
         this.nome = nome;
         this.genero = genero;
         this.sinopsia = sinopsia;
@@ -21,12 +21,12 @@ public class Filme {
         this.sinopsia = sinopsia;
     }
     
-    public int getCodigo() {
-        return codigo;
+    public int getId() {
+        return id;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -55,6 +55,6 @@ public class Filme {
 
     @Override
     public String toString() {
-        return "Filme{" + "codigo=" + codigo + ", nome=" + nome + ", genero=" + genero + ", sinopsia=" + sinopsia + '}';
+        return "Filme{" + "codigo=" + this.id + ", nome=" + this.nome + ", genero=" + this.genero + ", sinopsia=" + this.sinopsia + '}';
     }
 }

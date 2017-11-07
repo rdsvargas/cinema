@@ -22,7 +22,7 @@ public class RepositorioSalas {
 
     public boolean salaExiste(int numeroSala) {
         for (Sala sala : salas) {
-            if (sala.getNumeroSala() == numeroSala) {
+            if (sala.getId()== numeroSala) {
                 return true;
             }
         }
@@ -31,7 +31,7 @@ public class RepositorioSalas {
     
     public Sala buscarSala(int numeroSala){
         for (Sala sala : salas) {
-            if (sala.getNumeroSala() == numeroSala) {
+            if (sala.getId() == numeroSala) {
                 return sala;
             }
         }

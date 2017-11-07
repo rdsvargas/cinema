@@ -1,22 +1,18 @@
 package view;
 
 import view.menu.FilmeMenu;
-import repositorio.RepositorioFilmes;
 import java.util.Collections;
 import java.util.List;
 import model.Filme;
 import negocio.FilmeNegocio;
-import negocio.NegocioException;
 import util.Console;
+import util.ValidaDataException;
 
 public class FilmeUI {
 
-    private RepositorioFilmes lista;
-
     private FilmeNegocio filmeNegocio;
 
-    public FilmeUI(RepositorioFilmes lista) {
-        this.lista = lista;
+    public FilmeUI() {
         filmeNegocio = new FilmeNegocio();
     }
 
@@ -43,11 +39,6 @@ public class FilmeUI {
         } while (opcao != FilmeMenu.OP_VOLTAR);
     }
 
-    public void listaFilmes() {
-        List<Filme> listaFilmes = filmeNegocio.listar();
-        this.listaFilmes(listaFilmes);
-    }
-
     private void cadastrarFilme() {
         String nome = Console.scanString("Filme: ");
         String genero = Console.scanString("Genero: ");
@@ -55,17 +46,16 @@ public class FilmeUI {
         try {
             Filme filme = new Filme(nome, genero, sinopsia);
             filmeNegocio.salvar(filme);
-            //System.out.println("Paciente " + nome + " cadastrado com sucesso!");
             System.out.println(filme.toString() + " -> cadastrado com sucesso!");
-        } catch (NegocioException ex) {
+        } catch (ValidaDataException ex) {
             UIUtil.mostrarErro(ex.getMessage());
         }
     }
 
     private void alterarFilme() {
-        int codigo = Console.scanInt("Informe o Código do filme: ");
+        int filme_id = Console.scanInt("Informe o Código do filme: ");
         try {
-            Filme filme = filmeNegocio.localizarPorId(codigo);
+            Filme filme = filmeNegocio.localizarPorId(filme_id);
 
             if (filme == null) {
                 System.out.println("\nFilme não encontrado");
@@ -83,14 +73,14 @@ public class FilmeUI {
             filme.setSinopsia(sinopsia);
             
             filmeNegocio.atualizar(filme);
-            
-
-        } catch (NegocioException ex) {
+        } catch (ValidaDataException ex) {
             UIUtil.mostrarErro(ex.getMessage());
         }
     }
 
-    private void listaFilmes(List<Filme> listaFilmes) {
+    private void listaFilmes() {
+        List<Filme> listaFilmes = filmeNegocio.listar();
+
         if (listaFilmes.isEmpty()) {
             System.out.println("--------------------------------");
             System.out.println("Nao existem filmes cadastrados");
@@ -104,7 +94,7 @@ public class FilmeUI {
             for (Filme filme : listaFilmes) {
                 System.out.println(this.linhaSeparadora());
 
-                System.out.println(String.format("%-10s", filme.getCodigo())
+                System.out.println(String.format("%-10s", filme.getId())
                         + String.format("%-31s", "|" + filme.getNome())
                         + String.format("%-21s", "|" + filme.getGenero())
                         + String.format("%-51s", "|" + filme.getSinopsia()));
