@@ -57,11 +57,6 @@ public class FilmeUI {
         try {
             Filme filme = filmeNegocio.localizarPorId(filme_id);
 
-            if (filme == null) {
-                System.out.println("\nFilme não encontrado");
-                return;
-            }
-
             System.out.println(filme.toString() + "-> filme ");
 
             String nome = Console.scanString("Filme: ");
@@ -73,7 +68,7 @@ public class FilmeUI {
             filme.setSinopsia(sinopsia);
             
             filmeNegocio.atualizar(filme);
-        } catch (ValidaDataException ex) {
+        } catch (Exception ex) {
             UIUtil.mostrarErro(ex.getMessage());
         }
     }

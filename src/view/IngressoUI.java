@@ -60,7 +60,7 @@ public class IngressoUI {
                 } else {
                     throw new ValidaDataException("Saldo de ingressos insuficiente para atender a solicitação.");
                 }
-            } catch (ValidaDataException ex) {
+            } catch (Exception ex) {
                 UIUtil.mostrarErro(ex.getMessage());
             }
         }
