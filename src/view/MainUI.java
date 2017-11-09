@@ -5,6 +5,7 @@ package view;
 //import repositorio.RepositorioSessoes;
 //import repositorio.RepositorioIngressos;
 import util.Console;
+import util.ValidaDataException;
 import view.menu.MainMenu;
 
 public class MainUI {
@@ -21,7 +22,7 @@ public class MainUI {
 //        listaIngressos = new RepositorioIngressos();
 //    }
 
-    public void executar() {
+    public void executar() throws ValidaDataException {
         int opcao = 0;
         do {
 
@@ -40,6 +41,7 @@ public class MainUI {
                     break;
                 case MainMenu.OP_INGRESSOS:
                     //new IngressoUI(listaIngressos, listaSessoes).executar();
+                    new IngressoUI().executar();
                     break;
             }
         } while (opcao != MainMenu.OP_SAIR);

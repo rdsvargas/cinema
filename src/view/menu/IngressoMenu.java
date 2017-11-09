@@ -8,7 +8,7 @@ public class IngressoMenu {
     public static String getOpcoes() {
         return ("\n--------------------------\n"
               + "1 - Venda de Ingressos\n"
-              + "2 - Vendas por Sessão\n"
+              + "2 - Listar Ingressos\n"
               + "0 - Sair"
               + "\n--------------------------\n");
     }

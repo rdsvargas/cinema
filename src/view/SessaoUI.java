@@ -10,6 +10,7 @@ import negocio.FilmeNegocio;
 import negocio.SalaNegocio;
 import negocio.SessaoNegocio;
 import util.Console;
+import util.ValidaDataException;
 
 public class SessaoUI {
 
@@ -49,6 +50,9 @@ public class SessaoUI {
     private void cadastrarSessao() {
         try {
             LocalTime hora = Console.scanTime("Informe hora da Sessão (hh:mm): ");
+            if (hora == null) {
+                throw new ValidaDataException("Hora informada inválida.");
+            }
             Filme filme = filmeNegocio.localizarPorId(Console.scanInt("Informe o Código do filme: "));
             Sala sala = salaNegocio.localizarPorCodigo(Console.scanString("Identificação Sala: "));
 
@@ -67,14 +71,14 @@ public class SessaoUI {
 
             Sessao sessao = sessaoNegocio.localizarPorHorario(hora, sala_codigo);
             System.out.println(sessao.toString() + "\n");
-            
+
             hora = Console.scanTime("Informe novo horário da Sessão (hh:mm): ");
             int filme_id = Console.scanInt("Informe novo Filme: ");
-            
+
             Filme filme = filmeNegocio.localizarPorId(filme_id);
             sessao.setHora(hora);
             sessao.setFilme(filme);
-            
+
             sessaoNegocio.atualizar(sessao);
             System.out.println("\n" + sessao.toString());
         } catch (Exception ex) {

@@ -113,12 +113,14 @@ public class FilmeDaoBd extends DaoBdMain<Filme> implements FilmeDao {
             conectar(sql);
             comando.setInt(1, id);
             ResultSet resultado = comando.executeQuery();
-            while (resultado.next()) {
+            if (resultado.next()) {
                 String nome = resultado.getString("filme_nome");
                 String genero = resultado.getString("filme_genero");
                 String sinopisa = resultado.getString("filme_sinopsia");
 
                 filme = new Filme(id, nome, genero, sinopisa);
+            } else {
+                throw new BDException("Filme não encontrada.");
             }
         } catch (SQLException ex) {
             System.err.println("Erro de Sistema - Problema ao buscar os pacientes do Banco de Dados!");

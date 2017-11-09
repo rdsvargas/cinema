@@ -1,24 +1,27 @@
 package view;
 
 import java.time.LocalTime;
+import java.util.Collections;
+import java.util.List;
 import model.Ingresso;
-import repositorio.RepositorioIngressos;
-import repositorio.RepositorioSessoes;
 import model.Sessao;
+import negocio.IngressoNegocio;
+import negocio.SessaoNegocio;
 import util.Console;
+import util.ValidaDataException;
 import view.menu.IngressoMenu;
 
 public class IngressoUI {
 
-    private RepositorioIngressos lista;
-    private RepositorioSessoes listaSessoes;
+    private IngressoNegocio ingressoNegocio;
+    private SessaoNegocio sessaoNegocio;
 
-    public IngressoUI(RepositorioIngressos lista, RepositorioSessoes listaSessoes) {
-        this.lista = lista;
-        this.listaSessoes = listaSessoes;
+    public IngressoUI() {
+        this.ingressoNegocio = new IngressoNegocio();
+        this.sessaoNegocio = new SessaoNegocio();
     }
 
-    public void executar() {
+    public void executar() throws ValidaDataException {
         int opcao = 0;
         do {
             System.out.println(IngressoMenu.getOpcoes());
@@ -28,7 +31,7 @@ public class IngressoUI {
                     venderIngresso();
                     break;
                 case IngressoMenu.OP_LISTAR:
-                    vendaPorSecao();
+                    listarIngressos();
                     break;
                 case IngressoMenu.OP_VOLTAR:
                     break;
@@ -38,43 +41,67 @@ public class IngressoUI {
         } while (opcao != IngressoMenu.OP_VOLTAR);
     }
 
-    public void venderIngresso() {
+    public void venderIngresso() throws ValidaDataException {
         LocalTime hora = Console.scanTime("Informe hora da Sessão (hh:mm): ");
         if (hora == null) {
             System.out.println("Hora informada inválida.");
         } else {
-            Sessao sessao = listaSessoes.buscaSessao(hora);
-            if (sessao == null) {
-                System.out.println("Sessão informada inválida");
-            } else {
-                if (lista.getListaIngressos().isEmpty()) {
-                    lista.addIngresso(new Ingresso(1, sessao));
+            try {
+                String sala_codigo = Console.scanString("Identificação Sala: ");
+                Sessao sessao = sessaoNegocio.localizarPorHorario(hora, sala_codigo);
+                int saldo_ingressos = sessao.getSala().getQtdAssentos() - sessaoNegocio.ingressosVendidos(sessao.getId(), sessao.getSala().getId());
+                System.out.println("Saldo de ingressos: " + saldo_ingressos);
+
+                int qtd_ingressos = Console.scanInt("Informe a quandidade de ingressos a vender: ");
+
+                if (qtd_ingressos <= saldo_ingressos) {
+                    Ingresso ingresso = new Ingresso(sessao);
+                    ingressoNegocio.salvar(ingresso, qtd_ingressos);
                 } else {
-                    if (!lista.venderIngresso(hora)) {
-                        System.out.println("Ingressos esgotados para esta sessão");
-                    }
+                    throw new ValidaDataException("Saldo de ingressos insuficiente para atender a solicitação.");
                 }
+            } catch (ValidaDataException ex) {
+                UIUtil.mostrarErro(ex.getMessage());
             }
         }
     }
 
-    public void vendaPorSecao() {
-        if (lista.getListaIngressos().size() <= 0) {
-            System.out.println("-----------------------------------------------------");
-            System.out.println("Não foram efetuadas nenhuma venda de ingressos ainda.");
-            System.out.println("-----------------------------------------------------\n");
-        } else {
-            System.out.println(String.format("%-10s", "Ingressos") + 
-                    String.format("%-8s", "Sessão") + 
-                    String.format("%-30s", "Filme") + 
-                    String.format("%-15s", "Assentos Vagos"));
+    private void listarIngressos() {
+        List<Ingresso> listaIngressos = ingressoNegocio.listar();
 
-            for (Ingresso ingresso : lista.getListaIngressos()) {
-                System.out.println(String.format("%-10s", ingresso.getIngressosVendidos()) +
-                        String.format("%-8s", ingresso.getSessao().getHora()) + 
-                        String.format("%-30s", ingresso.getSessao().getFilme().getNome()) +
-                        String.format("%-15s", ingresso.getSessao().getQtdAssentos() - ingresso.getIngressosVendidos()));
+        if (listaIngressos.isEmpty()) {
+            System.out.println("-----------------------------------");
+            System.out.println("Nao foram vendidos nenhum ingresso");
+            System.out.println("-----------------------------------\n");
+        } else {
+            linhaSeparadora();
+            System.out.println(String.format("%-7s", "|Hora" )
+                    + String.format("%-12s", "|Sala")
+                    + String.format("%-32s", "|Filme")
+                    + String.format("%-8s", "|Vendidos")
+                    + String.format("%-5s", "|Saldo|")
+            );
+            linhaSeparadora();
+            for (Ingresso ingresso : listaIngressos) {
+                System.out.println(String.format("%-7s", "|" + ingresso.getSessao().getHora())
+                        + String.format("%-12s", "|" + ingresso.getSessao().getSala().getCodigo())
+                        + String.format("%-32s", "|" + ingresso.getSessao().getFilme().getNome())
+                        + "|" + String.format("%8d", ingresso.getSessao().getIngressos_vendidos())
+                        + "|" + String.format("%5d", ingresso.getSessao().getSala().getQtdAssentos() - ingresso.getSessao().getIngressos_vendidos())
+                        + "|"
+                );
+                linhaSeparadora();
             }
         }
+    }
+    
+    private void linhaSeparadora(){
+            System.out.println(String.format("%-7s", "+" + String.join("", Collections.nCopies(6, "-")))
+                    + String.format("%-12s", "+" + String.join("", Collections.nCopies(11, "-")))
+                    + String.format("%-32s", "+" + String.join("", Collections.nCopies(31, "-")))
+                    + String.format("%-8s", "+" + String.join("", Collections.nCopies(8, "-")))
+                    + String.format("%-5s", "+" + String.join("", Collections.nCopies(5, "-"))) 
+                    + "+"
+                    );
     }
 }

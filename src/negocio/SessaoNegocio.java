@@ -33,4 +33,8 @@ public class SessaoNegocio {
     public List<Sessao> listar(){
         return sessaoDao.listar();
     }
+    
+    public int ingressosVendidos(int sessao_id, int sala_id){
+        return this.sessaoDao.ingressosVendidos(sessao_id, sala_id);
+    }
 }

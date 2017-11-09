@@ -17,29 +17,29 @@ public class Console {
         Scanner scanner = new Scanner(System.in);
         int result;
         String teclado;
-        try{
+        try {
             teclado = scanner.nextLine();
             result = Integer.parseInt(teclado);
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             result = -1;
         }
         return result;
     }
 
-    public static LocalTime scanTime(Object out){
+    public static LocalTime scanTime(Object out) {
         System.out.print(out);
         Scanner scanner = new Scanner(System.in);
         LocalTime result;
         String teclado;
-        try{
-        teclado = scanner.nextLine();
-        result = DateUtil.stringToTime(teclado);
-        } catch (DateTimeParseException e){
+        try {
+            teclado = scanner.nextLine();
+            result = DateUtil.stringToTime(teclado);
+        } catch (DateTimeParseException e) {
             result = null;
         }
         return result;
     }
-    
+
     public static double scanDouble(Object out) {
         System.out.print(out);
         Scanner scanner = new Scanner(System.in);
