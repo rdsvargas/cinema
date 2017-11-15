@@ -9,14 +9,24 @@ import util.Console;
 import util.ValidaDataException;
 import view.menu.SalaMenu;
 
+/**
+ *
+ * @author Roger
+ */
 public class SalaUI {
 
     private SalaNegocio salaNegocio;
 
+    /**
+     *
+     */
     public SalaUI() {
         this.salaNegocio = new SalaNegocio();
     }
 
+    /**
+     *
+     */
     public void executar() {
         int opcao = 0;
         do {
@@ -77,6 +87,9 @@ public class SalaUI {
         }
     }
 
+    /**
+     *
+     */
     public void listaSalas() {
         List<Sala> listaSalas = salaNegocio.listar();
 

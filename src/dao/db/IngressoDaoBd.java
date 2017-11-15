@@ -18,11 +18,22 @@ import util.DateUtil;
  */
 public class IngressoDaoBd extends DaoBdMain<Ingresso> implements IngressoDao {
 
+    /**
+     *
+     * @param horario Horário da Sessao
+     * @param sala_id Identificador da Sala
+     * @return Saldo de Ingressos da Sessao
+     */
     @Override
     public int saldoIngressosPorSessaoeSala(LocalTime horario, int sala_id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param ingresso Object Ingresso
+     * @param qtd_vendido Quandidade de Ingressos vendidos
+     */
     @Override
     public void salvar(Ingresso ingresso, int qtd_vendido) {
         try {
@@ -47,16 +58,28 @@ public class IngressoDaoBd extends DaoBdMain<Ingresso> implements IngressoDao {
         }
     }
 
+    /**
+     *
+     * @param ingresso Object Ingresso
+     */
     @Override
     public void deletar(Ingresso ingresso) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param ingresso Object Ingresso
+     */
     @Override
     public void atualizar(Ingresso ingresso) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @return Lista Object Ingresso
+     */
     @Override
     public List<Ingresso> listar() {
         List<Ingresso> listaIngressos = new ArrayList<>();
@@ -106,6 +129,10 @@ public class IngressoDaoBd extends DaoBdMain<Ingresso> implements IngressoDao {
         return listaIngressos;
     }
 
+    /**
+     *
+     * @param dominio
+     */
     @Override
     public void salvar(Ingresso dominio) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

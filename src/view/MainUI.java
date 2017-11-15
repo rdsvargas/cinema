@@ -8,6 +8,10 @@ import util.Console;
 import util.ValidaDataException;
 import view.menu.MainMenu;
 
+/**
+ *
+ * @author Roger
+ */
 public class MainUI {
 
 //    private RepositorioFilmes listaFilmes;
@@ -22,6 +26,11 @@ public class MainUI {
 //        listaIngressos = new RepositorioIngressos();
 //    }
 
+    /**
+     *
+     * @throws ValidaDataException
+     */
+    
     public void executar() throws ValidaDataException {
         int opcao = 0;
         do {

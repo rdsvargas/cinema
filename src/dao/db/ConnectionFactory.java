@@ -16,6 +16,10 @@ public class ConnectionFactory {
     private final static String USUARIO = "postgres";
     private final static String SENHA = "rl";
 
+    /**
+     *
+     * @return Object Connection
+     */
     public static Connection getConnection(){
         Connection conexao = null;
         try{

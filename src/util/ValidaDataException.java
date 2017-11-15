@@ -11,6 +11,10 @@ package util;
  */
 public class ValidaDataException extends Exception{
 
+    /**
+     *
+     * @param s
+     */
     public ValidaDataException(String s) {
         super(s);
     }    

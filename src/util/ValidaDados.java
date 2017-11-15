@@ -11,6 +11,13 @@ package util;
  */
 public class ValidaDados {
 
+    /**
+     *
+     * @param data
+     * @param desc
+     * @param size
+     * @throws ValidaDataException
+     */
     public static  void validaEntrada(Object data, String desc, int size) throws ValidaDataException {
         if (data instanceof String) {
             if (((String) data).length() > size) {

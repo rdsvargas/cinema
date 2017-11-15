@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao.db;
 
 import dao.SessaoDao;
@@ -24,6 +19,10 @@ import util.DateUtil;
  */
 public class SessaoDaoBd extends DaoBdMain<Sessao> implements SessaoDao {
 
+    /**
+     *
+     * @param sessao Object Sessao
+     */
     @Override
     public void salvar(Sessao sessao) {
         try {
@@ -55,11 +54,19 @@ public class SessaoDaoBd extends DaoBdMain<Sessao> implements SessaoDao {
         }
     }
 
+    /**
+     *
+     * @param sessao Object Sessao
+     */
     @Override
     public void deletar(Sessao sessao) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param sessao Object Sessao
+     */
     @Override
     public void atualizar(Sessao sessao) {
         try {
@@ -79,6 +86,10 @@ public class SessaoDaoBd extends DaoBdMain<Sessao> implements SessaoDao {
 
     }
 
+    /**
+     *
+     * @return Lista Object Sessao
+     */
     @Override
     public List<Sessao> listar() {
         List<Sessao> listaSessoes = new ArrayList<>();
@@ -104,6 +115,12 @@ public class SessaoDaoBd extends DaoBdMain<Sessao> implements SessaoDao {
         return listaSessoes;
     }
 
+    /**
+     *
+     * @param horario Horario da Sessao
+     * @param sala_codigo Identificação da Sala
+     * @return
+     */
     @Override
     public Sessao localizarPorHorario(LocalTime horario, String sala_codigo) {
         Sessao sessao = null;
@@ -136,6 +153,12 @@ public class SessaoDaoBd extends DaoBdMain<Sessao> implements SessaoDao {
         return sessao;
     }
 
+    /**
+     *
+     * @param sessao_id Identicador da Sessao
+     * @param sala_id Idenficador da Sala
+     * @return Quantidade de Ingressos Vendidos
+     */
     @Override
     public int ingressosVendidos(int sessao_id, int sala_id) {
         int result = 0;

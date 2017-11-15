@@ -11,16 +11,27 @@ import util.Console;
 import util.ValidaDataException;
 import view.menu.IngressoMenu;
 
+/**
+ *
+ * @author Roger
+ */
 public class IngressoUI {
 
     private IngressoNegocio ingressoNegocio;
     private SessaoNegocio sessaoNegocio;
 
+    /**
+     *
+     */
     public IngressoUI() {
         this.ingressoNegocio = new IngressoNegocio();
         this.sessaoNegocio = new SessaoNegocio();
     }
 
+    /**
+     *
+     * @throws ValidaDataException
+     */
     public void executar() throws ValidaDataException {
         int opcao = 0;
         do {
@@ -41,6 +52,10 @@ public class IngressoUI {
         } while (opcao != IngressoMenu.OP_VOLTAR);
     }
 
+    /**
+     *
+     * @throws ValidaDataException
+     */
     public void venderIngresso() throws ValidaDataException {
         LocalTime hora = Console.scanTime("Informe hora da Sessão (hh:mm): ");
         if (hora == null) {

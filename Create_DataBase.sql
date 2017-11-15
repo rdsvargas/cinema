@@ -29,8 +29,14 @@ CREATE TABLE sessao
   sessao_hora character varying(5) NOT NULL,
   filme_id integer NOT NULL,
   sala_id integer NOT NULL,
-  primary key (sessao_id)
-);
+  primary key (sessao_id ),
+  foreign key (filme_id)
+    references filme (filme_id) match SIMPLE
+    on update no ACTION on delete no ACTION,
+  foreign key (sala_id)
+    references sala (sala_id) match SIMPLE
+    on update no ACTION on delete no ACTION
+)
 
 CREATE TABLE ingresso
 (
@@ -38,5 +44,11 @@ CREATE TABLE ingresso
   ingresso_qtd integer not null,
   sessao_id integer NOT NULL,
   sala_id integer NOT NULL,
-  primary key (ingresso_id)
+  primary key (ingresso_id),
+  foreign key (sessao_id)
+    references sessao (sessao_id) match SIMPLE
+    on update no ACTION on delete no ACTION,
+  foreign key (sala_id)
+    references sala (sala_id) match SIMPLE
+    on update no ACTION on delete no ACTION
 );

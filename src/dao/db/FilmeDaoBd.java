@@ -13,6 +13,10 @@ import model.Filme;
  */
 public class FilmeDaoBd extends DaoBdMain<Filme> implements FilmeDao {
 
+    /**
+     *
+     * @param filme Object Filme
+     */
     @Override
     public void salvar(Filme filme) {
         try {
@@ -41,6 +45,10 @@ public class FilmeDaoBd extends DaoBdMain<Filme> implements FilmeDao {
         }
     }
 
+    /**
+     *
+     * @param filme Object Filme
+     */
     @Override
     public void deletar(Filme filme) {
         try {
@@ -58,6 +66,10 @@ public class FilmeDaoBd extends DaoBdMain<Filme> implements FilmeDao {
         }
     }
 
+    /**
+     *
+     * @param filme Object Filme
+     */
     @Override
     public void atualizar(Filme filme) {
         try {
@@ -77,6 +89,10 @@ public class FilmeDaoBd extends DaoBdMain<Filme> implements FilmeDao {
         }
     }
 
+    /**
+     *
+     * @return Lista Object Filme
+     */
     @Override
     public List<Filme> listar() {
         List<Filme> listaFilmes = new ArrayList<>();
@@ -104,6 +120,11 @@ public class FilmeDaoBd extends DaoBdMain<Filme> implements FilmeDao {
         return listaFilmes;
     }
 
+    /**
+     *
+     * @param id Identificador do Filme
+     * @return Object Filme
+     */
     @Override
     public Filme localizarPorId(int id) {
         Filme filme = null;

@@ -18,14 +18,26 @@ public class IngressoNegocio {
 
     private IngressoDao ingressoDao;
 
+    /**
+     *
+     */
     public IngressoNegocio() {
         this.ingressoDao = new IngressoDaoBd();
     }
 
+    /**
+     *
+     * @param ingresso
+     * @param qtd_vendido
+     */
     public void salvar(Ingresso ingresso, int qtd_vendido) {
         this.ingressoDao.salvar(ingresso, qtd_vendido);
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Ingresso> listar() {
         return this.ingressoDao.listar();
     }   

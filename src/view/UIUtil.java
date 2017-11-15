@@ -13,15 +13,31 @@ import util.Console;
  */
 public class UIUtil {
 
+    /**
+     *
+     */
     public static final String SIM = "sim";
+
+    /**
+     *
+     */
     public static final String NAO = "nao";
     
+    /**
+     *
+     * @param msgErro
+     */
     public static void mostrarErro(Object msgErro) {
         System.out.println("\n*********");
         System.out.println("* " +msgErro);
         System.out.println("*********");
     }
     
+    /**
+     *
+     * @param msg
+     * @return
+     */
     public static boolean getConfirmacao(Object msg) {
         String confirmacao = "NAO";
         do {

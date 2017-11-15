@@ -12,18 +12,28 @@ import negocio.SessaoNegocio;
 import util.Console;
 import util.ValidaDataException;
 
+/**
+ *
+ * @author Roger
+ */
 public class SessaoUI {
 
     private SessaoNegocio sessaoNegocio;
     private FilmeNegocio filmeNegocio;
     private SalaNegocio salaNegocio;
 
+    /**
+     *
+     */
     public SessaoUI() {
         sessaoNegocio = new SessaoNegocio();
         filmeNegocio = new FilmeNegocio();
         salaNegocio = new SalaNegocio();
     }
 
+    /**
+     *
+     */
     public void executar() {
         int opcao = 0;
         do {
@@ -86,6 +96,9 @@ public class SessaoUI {
         }
     }
 
+    /**
+     *
+     */
     public void listarSessoes() {
         List<Sessao> listaSessoes = sessaoNegocio.listar();
         for (Sessao sessao : listaSessoes) {

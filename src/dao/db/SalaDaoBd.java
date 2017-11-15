@@ -13,6 +13,10 @@ import model.Sala;
  */
 public class SalaDaoBd extends DaoBdMain<Sala> implements SalaDao {
 
+    /**
+     *
+     * @param sala Object Sala
+     */
     @Override
     public void salvar(Sala sala) {
         try {
@@ -40,6 +44,10 @@ public class SalaDaoBd extends DaoBdMain<Sala> implements SalaDao {
         }
     }
 
+    /**
+     *
+     * @param sala Object Sala
+     */
     @Override
     public void deletar(Sala sala) {
         try {
@@ -55,9 +63,12 @@ public class SalaDaoBd extends DaoBdMain<Sala> implements SalaDao {
         } finally {
             fecharConexao();
         }
-        
     }
 
+    /**
+     *
+     * @param sala Object Sala
+     */
     @Override
     public void atualizar(Sala sala) {
         try {
@@ -77,6 +88,10 @@ public class SalaDaoBd extends DaoBdMain<Sala> implements SalaDao {
         }
     }
 
+    /**
+     *
+     * @return Lista Object Sala
+     */
     @Override
     public List<Sala> listar() {
         List<Sala> listaSalas = new ArrayList<>();
@@ -101,6 +116,11 @@ public class SalaDaoBd extends DaoBdMain<Sala> implements SalaDao {
         return listaSalas;
     }
 
+    /**
+     *
+     * @param codigo Identificação da Sala
+     * @return Object Sala
+     */
     @Override
     public Sala localizarPorCodigo(String codigo) {
         Sala sala = null;
@@ -126,6 +146,11 @@ public class SalaDaoBd extends DaoBdMain<Sala> implements SalaDao {
         return sala;
     }
 
+    /**
+     *
+     * @param id Identificador da Sala
+     * @return Object Sala
+     */
     @Override
     public Sala localizarPorId(int id) {
         Sala sala = null;
