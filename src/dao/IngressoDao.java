@@ -19,7 +19,7 @@ public interface IngressoDao extends DaoMain<Ingresso>{
 
     /**
      *
-     * @param ingresso Classe Ingresso
+     * @param ingresso Object Ingresso
      * @param qtd_vendido Quantidade de ingressos vendidos
      */
     public void salvar(Ingresso ingresso, int qtd_vendido);

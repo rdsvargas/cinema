@@ -12,13 +12,7 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Senac/NetBeans/2017_2/Cinema/src/view/SessaoUI.java</file>
-            <file>file:/E:/Senac/NetBeans/2017_2/Cinema/src/dao/db/SalaDaoBd.java</file>
-            <file>file:/E:/Senac/NetBeans/2017_2/Cinema/src/view/IngressoUI.java</file>
-            <file>file:/E:/Senac/NetBeans/2017_2/Cinema/src/model/Sessao.java</file>
-            <file>file:/E:/Senac/NetBeans/2017_2/Cinema/src/dao/db/IngressoDaoBd.java</file>
-            <file>file:/E:/Senac/NetBeans/2017_2/Cinema/src/view/FilmeUI.java</file>
-            <file>file:/E:/Senac/NetBeans/2017_2/Cinema/src/view/SalaUI.java</file>
+            <file>file:/E:/Senac/NetBeans/2017_2/Cinema/src/view/menu/SalaMenu.java</file>
         </group>
     </open-files>
 </project-private>

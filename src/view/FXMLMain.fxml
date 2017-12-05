@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="painelPrincipal" prefHeight="180.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLMainController">
+    <children>
+        <Button fx:id="btnFilme" layoutX="85.0" layoutY="34.0" onAction="#handleButtonAction" prefHeight="50.0" prefWidth="90.0" text="Filme" />
+      <Button fx:id="btnSala" layoutX="183.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="50.0" prefWidth="90.0" text="Sala" />
+      <Button fx:id="btnSessao" layoutX="85.0" layoutY="88.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="50.0" prefWidth="90.0" text="Sessão" />
+      <Button fx:id="btnIngresso" layoutX="183.0" layoutY="88.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="50.0" prefWidth="90.0" text="Ingresso" />
+      <Button fx:id="btnSair" layoutX="275.0" layoutY="147.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="61.0" text="Sair" />
+    </children>
+</AnchorPane>
