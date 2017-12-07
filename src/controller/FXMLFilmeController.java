@@ -30,9 +30,9 @@ import util.ValidaDataException;
 public class FXMLFilmeController implements Initializable {
 
     @FXML
-    ComboBox<String> cbFilme;
+    private ComboBox<String> cbFilme;
     @FXML
-    AnchorPane painelFilme;
+    private AnchorPane painelFilme;
     @FXML
     private Button btnSalvar;
     @FXML

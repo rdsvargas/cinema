@@ -29,7 +29,6 @@ public class FXMLMenuFilmeController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    
     @FXML
     AnchorPane painelMenuFilme;
     @FXML
@@ -45,16 +44,21 @@ public class FXMLMenuFilmeController implements Initializable {
     private void handleButtonAction(ActionEvent event) throws IOException {
         String title = "";
         Parent painelProximaTela = null;
-        if (event.getSource().equals(btnCadastrar)){
+        if (event.getSource().equals(btnCadastrar)) {
             painelProximaTela = FXMLLoader.load(getClass().getResource("/view/FXMLFilme.fxml"));
             title = CinemaConsts.TITLE_CADASTRO_FILME;
+        } else if (event.getSource().equals(btnListar)) {
+            painelProximaTela = FXMLLoader.load(getClass().getResource("/view/FXMLListaFilme.fxml"));
+            title = CinemaConsts.TITLE_MAIN;
+
         } else if (event.getSource().equals(btnVoltar)) {
             painelProximaTela = FXMLLoader.load(getClass().getResource("/view/FXMLMain.fxml"));
-            title = CinemaConsts.TITLE_MAIN;
+            title = CinemaConsts.TITLE_LISTA_FILME;
         }
         Stage janela = (Stage) painelMenuFilme.getScene().getWindow();
         janela.setTitle(title);
         janela.setScene(new Scene(painelProximaTela));
+        janela.centerOnScreen();
     }
 
     @Override

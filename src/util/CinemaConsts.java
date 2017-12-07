@@ -24,4 +24,7 @@ public class CinemaConsts {
     public static final String TITLE_CADASTRO_SALA = "Cadastrar Sala";
     public static final String TITLE_CADASTRO_SESSAO = "Cadastrar Sessão";
     public static final String TITLE_VENDA_INGRESSO = "Venda Ingressos";
+    
+    // Listas
+    public static final String TITLE_LISTA_FILME = "Lista de Filmes";
 }
