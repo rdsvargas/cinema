@@ -97,7 +97,7 @@ public class FilmeDaoBd extends DaoBdMain<Filme> implements FilmeDao {
     public List<Filme> listar() {
         List<Filme> listaFilmes = new ArrayList<>();
 
-        String sql = "SELECT * FROM filme";
+        String sql = "SELECT * FROM filme ORDER BY filme_nome";
 
         try {
             conectar(sql);

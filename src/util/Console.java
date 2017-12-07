@@ -103,4 +103,15 @@ public class Console {
         return (scanner.next().charAt(0));
     }
 
+    public static String formatString(Object out, int size){
+        String result = "";
+        if (out instanceof Integer){
+            result = String.valueOf(out);
+        }
+        
+        while(result.length()<size){
+            result = " " + result;
+        }
+        return result;
+    }
 }

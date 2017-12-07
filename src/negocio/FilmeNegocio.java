@@ -2,8 +2,10 @@ package negocio;
 
 import dao.FilmeDao;
 import dao.db.FilmeDaoBd;
+import java.util.ArrayList;
 import java.util.List;
 import model.Filme;
+import util.Console;
 import util.ValidaDados;
 import util.ValidaDataException;
 
@@ -64,4 +66,15 @@ public class FilmeNegocio {
     public List<Filme> listar(){
         return filmeDao.listar();
     }
+    
+    public List<String> listaFilme(){
+        List<Filme> listaFilmes = filmeDao.listar();
+        List<String> result = new ArrayList<>();
+        result.add("Novo");
+        for (Filme filme : listaFilmes){
+            result.add(Console.formatString(filme.getId(), 5) + " | " + filme.getNome());
+        }
+        return result;
+    }
+    
 }

@@ -41,6 +41,10 @@ public class FXMLMainController implements Initializable {
     @FXML
     private Label label;
 
+    public String retornaEmail(){
+        return "xx@xx.com.br";
+    }    
+    
     @FXML
     private void handleButtonAction(ActionEvent event) throws IOException {
         String title = "";
@@ -55,7 +59,6 @@ public class FXMLMainController implements Initializable {
         Stage janela = (Stage) painelPrincipal.getScene().getWindow();
         janela.setTitle(title);
         janela.setScene(new Scene(painelProximaTela));
-
     }
 
     @Override

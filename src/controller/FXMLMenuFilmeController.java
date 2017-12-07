@@ -15,7 +15,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import util.CinemaConsts;
@@ -49,7 +48,6 @@ public class FXMLMenuFilmeController implements Initializable {
         if (event.getSource().equals(btnCadastrar)){
             painelProximaTela = FXMLLoader.load(getClass().getResource("/view/FXMLFilme.fxml"));
             title = CinemaConsts.TITLE_CADASTRO_FILME;
-            
         } else if (event.getSource().equals(btnVoltar)) {
             painelProximaTela = FXMLLoader.load(getClass().getResource("/view/FXMLMain.fxml"));
             title = CinemaConsts.TITLE_MAIN;
