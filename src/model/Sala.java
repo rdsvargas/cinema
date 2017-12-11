@@ -60,7 +60,7 @@ public class Sala {
      *
      * @param codigo Identificação da sala
      */
-    public void setCode(String codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 

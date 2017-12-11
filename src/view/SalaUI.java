@@ -77,7 +77,7 @@ public class SalaUI {
             if (qtdAssentos == -1) {
                 System.out.println("Informe um valor numérico inteiro positivo para a quantidade de assentos");
             } else{
-               sala.setCode(codigo);
+               sala.setCodigo(codigo);
                sala.setQtdAssentos(qtdAssentos);
                salaNegocio.atualizar(sala);
             }

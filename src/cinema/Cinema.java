@@ -26,6 +26,7 @@ public class Cinema extends Application {
  
         stage.setTitle(CinemaConsts.TITLE_MAIN);
         stage.setScene(scene);
+        stage.setMaximized(true);
         stage.show();
     }
 

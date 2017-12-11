@@ -44,6 +44,10 @@ public class SalaNegocio {
         this.salaDao.atualizar(sala);
     }
     
+    public void deletar(Sala sala){
+        this.salaDao.deletar(sala);
+    }
+    
     /**
      *
      * @param codigo

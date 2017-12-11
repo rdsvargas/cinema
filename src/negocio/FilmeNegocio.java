@@ -50,6 +50,10 @@ public class FilmeNegocio {
         this.filmeDao.atualizar(filme);
     }
     
+    public void deletar(Filme filme){
+        this.filmeDao.deletar(filme);
+    }
+    
     /**
      *
      * @param id

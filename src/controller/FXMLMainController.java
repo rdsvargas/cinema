@@ -14,9 +14,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import util.CinemaConsts;
 
@@ -27,38 +28,57 @@ import util.CinemaConsts;
 public class FXMLMainController implements Initializable {
 
     @FXML
+    private VBox vbox;
+    @FXML
     AnchorPane painelPrincipal;
+    
+    // Menu Cadastro
     @FXML
-    private Button btnFilme;
+    private MenuItem mnuCadastroFilme;
     @FXML
-    private Button btnSala;
+    private MenuItem mnuCadastroSala;
     @FXML
-    private Button btnSessao;
+    private MenuItem mnuCadastroSessao;
     @FXML
-    private Button btnIngresso;
+    private MenuItem mnuIngressos;
+    @FXML 
+    private MenuItem mnuClose;
+    
+    // Menu Relatórios
     @FXML
-    private Button btnSair;
+    private MenuItem mnuLstFilmes;
     @FXML
-    private Label label;
-
-    public String retornaEmail(){
-        return "xx@xx.com.br";
-    }    
+    private MenuItem mnuLstSalas;
+    @FXML
+    private MenuItem mnuLstSessoes;
     
     @FXML
     private void handleButtonAction(ActionEvent event) throws IOException {
         String title = "";
-        Parent painelProximaTela = null;
-        if (event.getSource().equals(btnFilme)) {
-            painelProximaTela = FXMLLoader.load(this.getClass().getResource("/view/FXMLMenuFilme.fxml"));
-            title = CinemaConsts.TITLE_MNU_FILME;
-        } else if (event.getSource().equals(btnSair)) {
+        Parent root = null;
+        if (event.getSource().equals(mnuCadastroFilme)) {
+            root = FXMLLoader.load(this.getClass().getResource("/view/FXMLViewFilme.fxml"));
+            title = CinemaConsts.TITLE_CADASTRO_FILME;
+        } else if (event.getSource().equals(mnuCadastroSala)){
+            root = FXMLLoader.load(this.getClass().getResource("/view/FXMLViewSala.fxml"));
+            title = CinemaConsts.TITLE_CADASTRO_SALA;
+        } else if (event.getSource().equals(mnuCadastroSessao)){
+        } else if (event.getSource().equals(mnuIngressos)){
+        } else if (event.getSource().equals(mnuLstFilmes)){
+            root = FXMLLoader.load(this.getClass().getResource("/view/FXMLListaFilme.fxml"));
+            title = CinemaConsts.TITLE_LISTA_FILME;
+        } else if (event.getSource().equals(mnuLstSalas)){
+        } else if (event.getSource().equals(mnuLstSessoes)){
+        } else if (event.getSource().equals(mnuClose)) {
             System.exit(0);
         }
 
-        Stage janela = (Stage) painelPrincipal.getScene().getWindow();
-        janela.setTitle(title);
-        janela.setScene(new Scene(painelProximaTela));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle(title);
+        stage.initOwner(vbox.getScene().getWindow());
+        stage.showAndWait();
     }
 
     @Override

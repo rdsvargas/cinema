@@ -18,6 +18,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.Sala;
+import negocio.FilmeNegocio;
+import negocio.SalaNegocio;
 import util.ValidaDataException;
 
 /**
@@ -28,7 +31,7 @@ import util.ValidaDataException;
 public class FXMLSalaController implements Initializable {
 
     @FXML
-    AnchorPane painelSala;
+    private AnchorPane painelSala;
     @FXML
     private Button btnSalvar;
     @FXML
@@ -37,24 +40,37 @@ public class FXMLSalaController implements Initializable {
     private TextField textCodigo;
     @FXML
     private TextField textNrAssentos;
+
+    private SalaNegocio salaNegocio;
+    private Sala salaSel;
     
     @FXML
     private void handleButtonAction(ActionEvent event) throws ValidaDataException, IOException {
+        Stage stage = (Stage) painelSala.getScene().getWindow();
         if (event.getSource().equals(btnSalvar)) {
-            
-        } else if (event.getSource().equals(btnVoltar)) {
-            Parent painelProximaTela = FXMLLoader.load(getClass().getResource("/view/FXMLMenuSala.fxml"));
-            Stage janela = (Stage) painelSala.getScene().getWindow();
-            janela.setScene(new Scene(painelProximaTela));
-            
+            salaNegocio = new SalaNegocio();
+            if (this.salaSel == null){
+                salaNegocio.salvar(new Sala(textCodigo.getText(), 
+                        Integer.parseInt(textNrAssentos.getText())));
+            } else {
+                salaSel.setCodigo(textCodigo.getText());
+                salaSel.setQtdAssentos(Integer.parseInt(textNrAssentos.getText()));
+                salaNegocio.atualizar(salaSel);
+            }
         }
-        
+        stage.close();
     }
-    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
+
+    public void setSalaSelecionada(Sala salaSel){
+        if (salaSel != null){
+            this.salaSel = salaSel;
+            textCodigo.setText(this.salaSel.getCodigo());
+            textNrAssentos.setText(Integer.toString(this.salaSel.getQtdAssentos()));
+        }
+    }
 }
