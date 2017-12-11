@@ -2,8 +2,10 @@ package negocio;
 
 import dao.SalaDao;
 import dao.db.SalaDaoBd;
+import java.util.ArrayList;
 import java.util.List;
 import model.Sala;
+import util.Console;
 import util.ValidaDados;
 import util.ValidaDataException;
 
@@ -73,4 +75,14 @@ public class SalaNegocio {
     public List<Sala> listar(){
         return salaDao.listar();
     }
+    
+    public List<String> listaSala(){
+        List<Sala> listaSalas = salaDao.listar();
+        List<String> result = new ArrayList<>();
+        for (Sala sala : listaSalas){
+            result.add(Console.formatString(sala.getId(), 5) + " | " + sala.getCodigo());
+        }
+        return result;
+    }
+    
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="vboxSessao" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLViewSessaoController">
+   <children>
+      <ToolBar prefHeight="40.0" prefWidth="200.0">
+        <items>
+            <Button fx:id="btnCadastrar" mnemonicParsing="false" onAction="#trataBotoes" text="Cadastrar" />
+            <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#trataBotoes" text="Editar" />
+            <Button fx:id="btnRemover" mnemonicParsing="false" onAction="#trataBotoes" text="Remover" />
+          <Button fx:id="btnVoltar" mnemonicParsing="false" onAction="#trataBotoes" text="Voltar" />
+        </items>
+      </ToolBar>
+      <TableView fx:id="tableViewSessao" prefHeight="360.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="tableColumnSessao" prefWidth="90.0" text="Sessao" />
+          <TableColumn fx:id="tableColumnFilme" prefWidth="362.0" text="Filme" />
+            <TableColumn fx:id="tableColumnSala" minWidth="0.0" prefWidth="142.0" text="Sala" />
+        </columns>
+      </TableView>
+   </children>
+</VBox>

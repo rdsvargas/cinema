@@ -74,7 +74,6 @@ public class FilmeNegocio {
     public List<String> listaFilme(){
         List<Filme> listaFilmes = filmeDao.listar();
         List<String> result = new ArrayList<>();
-        result.add("Novo");
         for (Filme filme : listaFilmes){
             result.add(Console.formatString(filme.getId(), 5) + " | " + filme.getNome());
         }

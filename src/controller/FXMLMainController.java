@@ -63,6 +63,8 @@ public class FXMLMainController implements Initializable {
             root = FXMLLoader.load(this.getClass().getResource("/view/FXMLViewSala.fxml"));
             title = CinemaConsts.TITLE_CADASTRO_SALA;
         } else if (event.getSource().equals(mnuCadastroSessao)){
+            root = FXMLLoader.load(this.getClass().getResource("/view/FXMLViewSessao.fxml"));
+            title = CinemaConsts.TITLE_CADASTRO_SESSAO;
         } else if (event.getSource().equals(mnuIngressos)){
         } else if (event.getSource().equals(mnuLstFilmes)){
             root = FXMLLoader.load(this.getClass().getResource("/view/FXMLListaFilme.fxml"));

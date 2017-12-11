@@ -14,6 +14,8 @@ public class Sessao {
     private Filme filme;
     private int qtdAssentos;
     private int ingressos_vendidos;
+    private String nomeSala;
+    private String nomeFilme;
 
     /**
      *
@@ -61,6 +63,10 @@ public class Sessao {
         this.hora = hora;
     }
 
+    public String getNomeSala(){
+        return sala.getCodigo();
+    }
+    
     /**
      *
      * @return Object Sala
@@ -83,6 +89,10 @@ public class Sessao {
      */
     public Filme getFilme() {
         return this.filme;
+    }
+    
+    public String getNomeFilme(){
+        return this.filme.getNome();
     }
 
     /**
