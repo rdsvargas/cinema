@@ -72,7 +72,19 @@ public class FXMLViewSessaoController implements Initializable {
                 FXMLSessaoController controller = (FXMLSessaoController) loader.getController();
                 controller.setSessaoSelecionada(null);
             } else if (event.getSource().equals(btnEditar)) {
+                Sessao sessaoSel = tableViewSessao.getSelectionModel().getSelectedItem();
+                if (sessaoSel != null) {
+                    FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/FXMLSessao.fxml"));
+                    root = (Parent) loader.load();
+                    FXMLSessaoController controller = (FXMLSessaoController) loader.getController();
+                    controller.setSessaoSelecionada(sessaoSel);
+                }
             } else if (event.getSource().equals(btnRemover)) {
+                Sessao sessao = tableViewSessao.getSelectionModel().getSelectedItem();
+                if (sessao != null) {
+                    sessaoNegocio.deletar(sessao);
+                }
+                
             } else if (event.getSource().equals(btnVoltar)) {
                 Stage stage = (Stage) vboxSessao.getScene().getWindow();
                 stage.close();
@@ -94,8 +106,8 @@ public class FXMLViewSessaoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         sessaoNegocio = new SessaoNegocio();
-        
-        if (tableViewSessao != null){
+
+        if (tableViewSessao != null) {
             carregarTableViewSessoes();
         }
     }
@@ -104,11 +116,10 @@ public class FXMLViewSessaoController implements Initializable {
         tableColumnSessao.setCellValueFactory(new PropertyValueFactory<>("hora"));
         tableColumnFilme.setCellValueFactory(new PropertyValueFactory<>("nomeFilme"));
         tableColumnSala.setCellValueFactory(new PropertyValueFactory<>("nomeSala"));
-        
+
         listaSessoes = sessaoNegocio.listar();
         observableListaSessoes = FXCollections.observableArrayList(listaSessoes);
         tableViewSessao.setItems(observableListaSessoes);
     }
-    
-    
+
 }

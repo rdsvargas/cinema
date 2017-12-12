@@ -60,7 +60,19 @@ public class SessaoDaoBd extends DaoBdMain<Sessao> implements SessaoDao {
      */
     @Override
     public void deletar(Sessao sessao) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            String sql = "DELETE FROM sessao WHERE sessao_id = ?";
+
+            conectar(sql);
+            comando.setInt(1, sessao.getId());
+            comando.executeUpdate();
+            
+        } catch (SQLException ex) {
+            System.err.println("Erro de Sistema - Problema ao deletar sessão no Banco de Dados!");
+            throw new BDException(ex);
+        } finally {
+            fecharConexao();
+        }
     }
 
     /**
@@ -102,8 +114,9 @@ public class SessaoDaoBd extends DaoBdMain<Sessao> implements SessaoDao {
                 Filme filme = new FilmeNegocio().localizarPorId(resultado.getInt("filme_id"));
                 Sala sala = new SalaNegocio().localizarPorId(resultado.getInt("sala_id"));
                 LocalTime horario = DateUtil.stringToTime(resultado.getString("sessao_hora"));
+                int sessaoId = Integer.parseInt(resultado.getString("sessao_id"));
 
-                listaSessoes.add(new Sessao(horario, sala, filme));
+                listaSessoes.add(new Sessao(sessaoId, horario, sala, filme));
             }
         } catch (SQLException ex) {
             System.err.println("Erro de Sistema - Problema ao buscar a sessão do Banco de Dados!");
@@ -153,6 +166,36 @@ public class SessaoDaoBd extends DaoBdMain<Sessao> implements SessaoDao {
         return sessao;
     }
 
+    @Override
+    public Sessao localizarPorId(int sessao_id){
+        Sessao sessao = null;
+        try {
+            String sql = "SELECT * FROM sessao WHERE sessao_id = ?";
+
+            conectar(sql);
+            comando.setInt(1, sessao_id);
+            ResultSet resultado = comando.executeQuery();
+            if (resultado.next()) {
+                Filme filme = new FilmeNegocio().localizarPorId(resultado.getInt("filme_id"));
+                Sala sala = new SalaNegocio().localizarPorId(resultado.getInt("sala_id"));
+                
+                sessao = new Sessao(
+                        sessao_id, 
+                        DateUtil.stringToTime(resultado.getString("sessao_hora")), 
+                        sala, 
+                        filme);
+
+            } else {
+                throw new BDException("Sessão não encontrada.");
+            }
+        } catch (SQLException ex) {
+            System.err.println("Erro de Sistema - Problema ao buscar a sessão do Banco de Dados!");
+            throw new BDException(ex);
+        } finally {
+            fecharConexao();
+        }
+        return sessao;
+    }
     /**
      *
      * @param sessao_id Identicador da Sessao

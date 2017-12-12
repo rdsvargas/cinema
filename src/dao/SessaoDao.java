@@ -16,6 +16,8 @@ public interface SessaoDao extends DaoMain<Sessao>{
      * @return Object Sessao
      */
     public Sessao localizarPorHorario(LocalTime horario, String sala_codigo);
+    
+    public Sessao localizarPorId(int sessao_id);
 
     /**
      *

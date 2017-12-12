@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<VBox fx:id="vboxIngresso" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLViewIngressoController">
+   <children>
+      <ToolBar prefHeight="40.0" prefWidth="200.0">
+        <items>
+          <Button mnemonicParsing="false" text="Button" />
+            <Button mnemonicParsing="false" text="Button" />
+            <Button mnemonicParsing="false" text="Button" />
+            <Button mnemonicParsing="false" text="Button" />
+        </items>
+      </ToolBar>
+      <TableView fx:id="tableViewIngresso" prefHeight="361.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="tableColumnQtdIngresso" prefWidth="75.0" text="Qtd Ingressos" />
+          <TableColumn fx:id="tableColumnSessao" prefWidth="97.0" text="Sessao" />
+            <TableColumn fx:id="tableColumnSala" prefWidth="152.0" text="Sala" />
+            <TableColumn fx:id="tableColumnFilme" prefWidth="271.0" text="Filme" />
+        </columns>
+      </TableView>
+   </children>
+</VBox>

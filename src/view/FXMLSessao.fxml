@@ -22,6 +22,7 @@
             <Label text="Sessão:" />
             <Label text="Filme:" GridPane.rowIndex="1" />
             <Label text="Sala:" GridPane.rowIndex="2" />
+            <TextField fx:id="textFieldSessao" maxWidth="70.0" prefWidth="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
             <ComboBox fx:id="cbFilme" prefHeight="25.0" prefWidth="383.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <ComboBox fx:id="cbSala" prefHeight="25.0" prefWidth="382.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>

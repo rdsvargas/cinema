@@ -10,6 +10,7 @@ import model.Filme;
 import model.Ingresso;
 import model.Sala;
 import model.Sessao;
+import negocio.SessaoNegocio;
 import util.DateUtil;
 
 /**
@@ -118,10 +119,10 @@ public class IngressoDaoBd extends DaoBdMain<Ingresso> implements IngressoDao {
                         sala,
                         filme,
                         resultado.getInt("ingressos_vendidos"));
-                listaIngressos.add(new Ingresso(sessao));
+                listaIngressos.add(new Ingresso(sessao, resultado.getInt("ingressos_vendidos")));
             }
         } catch (SQLException ex) {
-            System.err.println("Erro de Sistema - Problema ao salvar filme no Banco de Dados!");
+            System.err.println("Erro de Sistema - Problema consulta ingressos no Banco de Dados!");
             throw new BDException(ex);
         } finally {
             this.fecharConexao();
@@ -129,6 +130,27 @@ public class IngressoDaoBd extends DaoBdMain<Ingresso> implements IngressoDao {
         return listaIngressos;
     }
 
+    @Override
+    public List<Ingresso> listaTableView(){
+        List<Ingresso> listaIngressos = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM ingresso";
+            conectar(sql);
+            ResultSet resultado = comando.executeQuery();
+            while (resultado.next()) {
+                Sessao sessao = new SessaoNegocio().localizarPorId(resultado.getInt("sessao_id"));
+                listaIngressos.add(new Ingresso(resultado.getInt("ingresso_id"), resultado.getInt("ingresso_qtd"), sessao));
+            }
+            
+        } catch (SQLException ex) {
+            System.err.println("Erro de Sistema - Problema consulta ingressos no Banco de Dados!");
+            throw new BDException(ex);
+        } finally {
+            this.fecharConexao();
+        }
+        return listaIngressos;
+    }
+    
     /**
      *
      * @param dominio

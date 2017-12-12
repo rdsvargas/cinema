@@ -15,7 +15,7 @@
                   <MenuItem fx:id="mnuCadastroFilme" mnemonicParsing="false" onAction="#handleButtonAction" text="Filmes" />
               <MenuItem fx:id="mnuCadastroSala" mnemonicParsing="false" onAction="#handleButtonAction" text="Sala" />
                   <MenuItem fx:id="mnuCadastroSessao" mnemonicParsing="false" onAction="#handleButtonAction" text="Sessão" />
-                  <MenuItem fx:id="mnuIngessos" mnemonicParsing="false" onAction="#handleButtonAction" text="Ingressos" />
+                  <MenuItem fx:id="mnuIngressos" mnemonicParsing="false" onAction="#handleButtonAction" text="Ingressos" />
                   <MenuItem fx:id="mnuClose" mnemonicParsing="false" onAction="#handleButtonAction" text="Fechar Aplicação" />
             </items>
           </Menu>

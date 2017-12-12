@@ -6,19 +6,27 @@
 package controller;
 
 import java.net.URL;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
+import model.Filme;
+import model.Sala;
 import model.Sessao;
 import negocio.FilmeNegocio;
 import negocio.SalaNegocio;
 import negocio.SessaoNegocio;
 import util.Console;
+import util.DateUtil;
 
 /**
  * FXML Controller class
@@ -33,12 +41,14 @@ public class FXMLSessaoController implements Initializable {
     @FXML
     private AnchorPane painelSessao;
     @FXML
+    private TextField textFieldSessao;
+    @FXML
     private ComboBox cbFilme;
     @FXML
     private ComboBox cbSala;
     @FXML
     private Button btnSalvar;
-
+    
     private SessaoNegocio sessaoNegocio;
     private FilmeNegocio filmeNegocio;
     private SalaNegocio salaNegocio;
@@ -47,14 +57,36 @@ public class FXMLSessaoController implements Initializable {
     @FXML
     private void handleButtonAction(ActionEvent event) {
         Stage stage = (Stage) painelSessao.getScene().getWindow();
+        boolean exitForm = true;
         if (event.getSource().equals(btnSalvar)) {
-            sessaoNegocio = new SessaoNegocio();
-            if (this.sessaoSel == null) {
+            try {
+                LocalTime horaSessao = DateUtil.stringToTime(textFieldSessao.getText());
 
+                sessaoNegocio = new SessaoNegocio();
+                int filmeId = Integer.parseInt(cbFilme.getSelectionModel().getSelectedItem().toString().substring(0, 5).trim());
+                int salaId = Integer.parseInt(cbSala.getSelectionModel().getSelectedItem().toString().substring(0, 5).trim());
+                Filme filme = filmeNegocio.localizarPorId(filmeId);
+                Sala sala = salaNegocio.localizarPorId(salaId);
+                if (this.sessaoSel == null) {
+                    sessaoNegocio.salvar(new Sessao(
+                            horaSessao,
+                            sala,
+                            filme));
+                } else {
+                    this.sessaoSel.setHora(DateUtil.stringToTime(textFieldSessao.getText()));
+                    this.sessaoSel.setFilme(filme);
+                    this.sessaoSel.setSala(sala);
+                    sessaoNegocio.atualizar(this.sessaoSel);
+                }
+            } catch (DateTimeParseException ex) {
+                JOptionPane.showMessageDialog(null, "Informar formato 24h ex: 13:00");
+                textFieldSessao.requestFocus();
+                exitForm = false;
             }
         }
-        stage.close();
-
+        if (exitForm) {
+            stage.close();
+        }
     }
 
     @Override
@@ -69,22 +101,22 @@ public class FXMLSessaoController implements Initializable {
     public void setSessaoSelecionada(Sessao sessaoSel) {
         if (sessaoSel != null) {
             this.sessaoSel = sessaoSel;
+            textFieldSessao.setText(DateUtil.timeToString(this.sessaoSel.getHora()));
+            cbFilme.setValue(Console.formatString(this.sessaoSel.getFilme().getId(), 5) + " | " + this.sessaoSel.getFilme().getNome());
+            cbSala.setValue(Console.formatString(this.sessaoSel.getSala().getId(), 5) + " | " + this.sessaoSel.getSala().getCodigo());
         }
     }
 
     private void fillComboBoxFilme() {
         cbFilme.getItems().clear();
         cbFilme.getItems().addAll(filmeNegocio.listaFilme());
-        if (this.sessaoSel == null) {
-            cbFilme.getSelectionModel().select(0);
-        } else {
-            cbFilme.setValue(Console.formatString(this.sessaoSel.getFilme().getId(), 5) + " | " + this.sessaoSel.getFilme().getNome());
-        }
+        cbFilme.getSelectionModel().select(0);
     }
 
     private void fillComboBoxSala() {
         cbSala.getItems().clear();
         cbSala.getItems().addAll(salaNegocio.listaSala());
-
+        cbSala.getSelectionModel().select(0);
     }
 }
+

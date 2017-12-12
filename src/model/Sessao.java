@@ -17,6 +17,14 @@ public class Sessao {
     private String nomeSala;
     private String nomeFilme;
 
+    public Sessao(int id, LocalTime hora, Sala sala, Filme filme){
+        this.id = id;
+        this.hora = hora;
+        this.sala = sala;
+        this.filme = filme;
+        this.qtdAssentos = sala.getQtdAssentos();
+    }
+    
     /**
      *
      * @param hora Horario da sessao

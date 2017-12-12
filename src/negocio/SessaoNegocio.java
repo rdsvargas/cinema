@@ -36,6 +36,10 @@ public class SessaoNegocio {
     public void atualizar(Sessao sessao){
         this.sessaoDao.atualizar(sessao);
     }
+
+    public void deletar(Sessao sessao){
+        this.sessaoDao.deletar(sessao);
+    }
     
     /**
      *
@@ -45,6 +49,10 @@ public class SessaoNegocio {
      */
     public Sessao localizarPorHorario(LocalTime horario, String sala_codigo){
         return sessaoDao.localizarPorHorario(horario, sala_codigo);
+    }
+    
+    public Sessao localizarPorId(int sessao_id){
+        return sessaoDao.localizarPorId(sessao_id);
     }
     
     /**

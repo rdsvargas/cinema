@@ -41,4 +41,9 @@ public class IngressoNegocio {
     public List<Ingresso> listar() {
         return this.ingressoDao.listar();
     }   
+    
+    public List<Ingresso> listaTableView() {
+        return this.ingressoDao.listaTableView();
+    }   
+    
 }
