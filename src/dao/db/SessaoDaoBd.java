@@ -66,7 +66,7 @@ public class SessaoDaoBd extends DaoBdMain<Sessao> implements SessaoDao {
             conectar(sql);
             comando.setInt(1, sessao.getId());
             comando.executeUpdate();
-            
+
         } catch (SQLException ex) {
             System.err.println("Erro de Sistema - Problema ao deletar sessão no Banco de Dados!");
             throw new BDException(ex);
@@ -82,11 +82,12 @@ public class SessaoDaoBd extends DaoBdMain<Sessao> implements SessaoDao {
     @Override
     public void atualizar(Sessao sessao) {
         try {
-            String sql = "UPDATE sessao SET sessao_hora = ?, filme_id = ? WHERE sessao_id = ?";
+            String sql = "UPDATE sessao SET sessao_hora = ?, filme_id = ?, sala_id = ? WHERE sessao_id = ?";
             conectar(sql);
             comando.setString(1, sessao.getHora().toString());
             comando.setInt(2, sessao.getFilme().getId());
-            comando.setInt(3, sessao.getId());
+            comando.setInt(3, sessao.getSala().getId());
+            comando.setInt(4, sessao.getId());
 
             comando.executeUpdate();
         } catch (SQLException ex) {
@@ -106,7 +107,7 @@ public class SessaoDaoBd extends DaoBdMain<Sessao> implements SessaoDao {
     public List<Sessao> listar() {
         List<Sessao> listaSessoes = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM sessao";
+            String sql = "SELECT * FROM sessao ORDER BY sessao_hora";
 
             conectar(sql);
             ResultSet resultado = comando.executeQuery();
@@ -149,7 +150,7 @@ public class SessaoDaoBd extends DaoBdMain<Sessao> implements SessaoDao {
             if (resultado.next()) {
                 Filme filme = new FilmeNegocio().localizarPorId(resultado.getInt("filme_id"));
                 Sala sala = new SalaNegocio().localizarPorCodigo(sala_codigo);
-                
+
                 int sessao_id = resultado.getInt("sessao_id");
                 int ingressos_vendidos = this.ingressosVendidos(sessao_id, sala.getId());
                 sessao = new Sessao(sessao_id, horario, sala, filme, ingressos_vendidos);
@@ -167,7 +168,7 @@ public class SessaoDaoBd extends DaoBdMain<Sessao> implements SessaoDao {
     }
 
     @Override
-    public Sessao localizarPorId(int sessao_id){
+    public Sessao localizarPorId(int sessao_id) {
         Sessao sessao = null;
         try {
             String sql = "SELECT * FROM sessao WHERE sessao_id = ?";
@@ -178,11 +179,11 @@ public class SessaoDaoBd extends DaoBdMain<Sessao> implements SessaoDao {
             if (resultado.next()) {
                 Filme filme = new FilmeNegocio().localizarPorId(resultado.getInt("filme_id"));
                 Sala sala = new SalaNegocio().localizarPorId(resultado.getInt("sala_id"));
-                
+
                 sessao = new Sessao(
-                        sessao_id, 
-                        DateUtil.stringToTime(resultado.getString("sessao_hora")), 
-                        sala, 
+                        sessao_id,
+                        DateUtil.stringToTime(resultado.getString("sessao_hora")),
+                        sala,
                         filme);
 
             } else {
@@ -196,6 +197,7 @@ public class SessaoDaoBd extends DaoBdMain<Sessao> implements SessaoDao {
         }
         return sessao;
     }
+
     /**
      *
      * @param sessao_id Identicador da Sessao
@@ -214,7 +216,7 @@ public class SessaoDaoBd extends DaoBdMain<Sessao> implements SessaoDao {
             ResultSet resultado = comando.executeQuery();
             if (resultado.next()) {
                 result = resultado.getInt("total");
-            }            
+            }
         } catch (SQLException ex) {
             System.err.println("Erro de Sistema - Problema ao acessao quantidade de ingressos do Banco de Dados!");
             throw new BDException(ex);
@@ -222,5 +224,79 @@ public class SessaoDaoBd extends DaoBdMain<Sessao> implements SessaoDao {
             fecharConexao();
         }
         return result;
+    }
+
+    @Override
+    public List<Sessao> localizarHoraBySala(Sessao sessao) {
+        List<Sessao> listaSessoes = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM sessao WHERE sessao_hora = ? and sala_id = ?";
+
+            conectar(sql);
+            comando.setString(1, DateUtil.timeToString(sessao.getHora()));
+            comando.setInt(2, sessao.getSala().getId());
+            ResultSet resultado = comando.executeQuery();
+            while (resultado.next()) {
+                Filme filme = new FilmeNegocio().localizarPorId(resultado.getInt("filme_id"));
+                Sala sala = new SalaNegocio().localizarPorId(resultado.getInt("sala_id"));
+                LocalTime horario = DateUtil.stringToTime(resultado.getString("sessao_hora"));
+                int sessaoId = Integer.parseInt(resultado.getString("sessao_id"));
+
+                listaSessoes.add(new Sessao(sessaoId, horario, sala, filme));
+            }
+        } catch (SQLException ex) {
+            System.err.println("Erro de Sistema - Problema ao buscar a sessão do Banco de Dados!");
+            throw new BDException(ex);
+        } finally {
+            fecharConexao();
+        }
+
+        return listaSessoes;
+    }
+
+    @Override
+    public List<Sessao> listaSessaoByFilme(int filme_id) {
+        List<Sessao> listaSessoes = new ArrayList<>();
+        try {
+//            String sql = "SELECT sessao.*"
+//                    + "     FROM sessao"
+//                    + "    INNER JOIN sala ON sala.sala_id = sessao.sala_id"
+//                    + "    WHERE sessao.filme_id = ?"
+//                    + "    ORDER BY sessao.sessao_hora";
+            String sql = "SELECT sessao.*,"
+                    + "          sala.sala_qtd_assentos,"
+                    + "          ing.ingressos_vendidos,"
+                    + "          CASE"
+                    + "            WHEN ing.ingressos_vendidos is null then sala.sala_qtd_assentos"
+                    + "            ELSE (sala.sala_qtd_assentos - ing.ingressos_vendidos)"
+                    + "          END saldo_ingressos"
+                    + "     FROM sessao"
+                    + "    INNER JOIN sala"
+                    + "       ON sala.sala_id = sessao.sala_id"
+                    + "    INNER JOIN filme"
+                    + "       ON filme.filme_id = sessao.filme_id"
+                    + "     LEFT JOIN (SELECT SUM(ingresso_qtd) ingressos_vendidos, sessao_id"
+                    + "                  FROM ingresso"
+                    + "                 GROUP BY sessao_id) ing on ing.sessao_id = sessao.sessao_id"
+                    + "    WHERE sessao.filme_id = ?";
+
+            conectar(sql);
+            comando.setInt(1, filme_id);
+            ResultSet resultado = comando.executeQuery();
+            while (resultado.next()) {
+                Filme filme = new FilmeNegocio().localizarPorId(resultado.getInt("filme_id"));
+                Sala sala = new SalaNegocio().localizarPorId(resultado.getInt("sala_id"));
+                LocalTime horario = DateUtil.stringToTime(resultado.getString("sessao_hora"));
+                int sessaoId = Integer.parseInt(resultado.getString("sessao_id"));
+
+                listaSessoes.add(new Sessao(sessaoId, horario, sala, filme, resultado.getInt("ingressos_vendidos")));
+            }
+        } catch (SQLException ex) {
+            System.err.println("Erro de Sistema - Problema ao buscar a sessão do Banco de Dados!");
+            throw new BDException(ex);
+        } finally {
+            fecharConexao();
+        }
+        return listaSessoes;
     }
 }

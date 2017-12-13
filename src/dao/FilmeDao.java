@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.List;
 import model.Filme;
 
 /**
@@ -14,4 +15,6 @@ public interface FilmeDao extends DaoMain<Filme> {
      * @return Object Filme
      */
     public Filme localizarPorId(int filme_id);
+    
+    public List<Filme> listaFilmeBySessao();
 }

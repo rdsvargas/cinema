@@ -104,6 +104,7 @@ public class Filme {
 
     @Override
     public String toString() {
-        return "Filme{" + "codigo=" + this.id + ", nome=" + this.nome + ", genero=" + this.genero + ", sinopsia=" + this.sinopsia + '}';
+        //return "Filme{" + "codigo=" + this.id + ", nome=" + this.nome + ", genero=" + this.genero + ", sinopsia=" + this.sinopsia + '}';
+        return this.nome;
     }
 }

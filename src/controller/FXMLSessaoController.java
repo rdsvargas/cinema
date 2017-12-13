@@ -14,7 +14,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -43,9 +42,9 @@ public class FXMLSessaoController implements Initializable {
     @FXML
     private TextField textFieldSessao;
     @FXML
-    private ComboBox cbFilme;
+    private ComboBox<Filme> cbFilme;
     @FXML
-    private ComboBox cbSala;
+    private ComboBox<Sala> cbSala;
     @FXML
     private Button btnSalvar;
     
@@ -55,7 +54,7 @@ public class FXMLSessaoController implements Initializable {
     private Sessao sessaoSel;
 
     @FXML
-    private void handleButtonAction(ActionEvent event) {
+    private void handleButtonAction(ActionEvent event) throws Exception {
         Stage stage = (Stage) painelSessao.getScene().getWindow();
         boolean exitForm = true;
         if (event.getSource().equals(btnSalvar)) {
@@ -63,10 +62,8 @@ public class FXMLSessaoController implements Initializable {
                 LocalTime horaSessao = DateUtil.stringToTime(textFieldSessao.getText());
 
                 sessaoNegocio = new SessaoNegocio();
-                int filmeId = Integer.parseInt(cbFilme.getSelectionModel().getSelectedItem().toString().substring(0, 5).trim());
-                int salaId = Integer.parseInt(cbSala.getSelectionModel().getSelectedItem().toString().substring(0, 5).trim());
-                Filme filme = filmeNegocio.localizarPorId(filmeId);
-                Sala sala = salaNegocio.localizarPorId(salaId);
+                Filme filme = cbFilme.getSelectionModel().getSelectedItem();
+                Sala sala = cbSala.getSelectionModel().getSelectedItem();
                 if (this.sessaoSel == null) {
                     sessaoNegocio.salvar(new Sessao(
                             horaSessao,
@@ -79,7 +76,11 @@ public class FXMLSessaoController implements Initializable {
                     sessaoNegocio.atualizar(this.sessaoSel);
                 }
             } catch (DateTimeParseException ex) {
-                JOptionPane.showMessageDialog(null, "Informar formato 24h ex: 13:00");
+                JOptionPane.showMessageDialog(null, "Informar formato 24h ex: 13:00", "Alerta", JOptionPane.INFORMATION_MESSAGE);
+                textFieldSessao.requestFocus();
+                exitForm = false;
+            } catch (Exception ex){
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Alerta", JOptionPane.INFORMATION_MESSAGE);
                 textFieldSessao.requestFocus();
                 exitForm = false;
             }
@@ -102,20 +103,20 @@ public class FXMLSessaoController implements Initializable {
         if (sessaoSel != null) {
             this.sessaoSel = sessaoSel;
             textFieldSessao.setText(DateUtil.timeToString(this.sessaoSel.getHora()));
-            cbFilme.setValue(Console.formatString(this.sessaoSel.getFilme().getId(), 5) + " | " + this.sessaoSel.getFilme().getNome());
-            cbSala.setValue(Console.formatString(this.sessaoSel.getSala().getId(), 5) + " | " + this.sessaoSel.getSala().getCodigo());
+            cbFilme.setValue(sessaoSel.getFilme());
+            cbSala.setValue(sessaoSel.getSala());
         }
     }
 
     private void fillComboBoxFilme() {
         cbFilme.getItems().clear();
-        cbFilme.getItems().addAll(filmeNegocio.listaFilme());
+        cbFilme.getItems().addAll(filmeNegocio.listar());
         cbFilme.getSelectionModel().select(0);
     }
 
     private void fillComboBoxSala() {
         cbSala.getItems().clear();
-        cbSala.getItems().addAll(salaNegocio.listaSala());
+        cbSala.getItems().addAll(salaNegocio.listar());
         cbSala.getSelectionModel().select(0);
     }
 }

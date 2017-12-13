@@ -46,4 +46,7 @@ public class IngressoNegocio {
         return this.ingressoDao.listaTableView();
     }   
     
+    public void deletar(Ingresso ingresso){
+        this.ingressoDao.deletar(ingresso);
+    }
 }

@@ -1,6 +1,7 @@
 package dao;
 
 import java.time.LocalTime;
+import java.util.List;
 import model.Sessao;
 
 /**
@@ -18,6 +19,8 @@ public interface SessaoDao extends DaoMain<Sessao>{
     public Sessao localizarPorHorario(LocalTime horario, String sala_codigo);
     
     public Sessao localizarPorId(int sessao_id);
+    
+    public List<Sessao> localizarHoraBySala(Sessao sessao);
 
     /**
      *
@@ -26,4 +29,6 @@ public interface SessaoDao extends DaoMain<Sessao>{
      * @return Total de ingressos vendidos
      */
     public int ingressosVendidos(int sessao_id, int sala_id);
+    
+    public List<Sessao> listaSessaoByFilme(int filme_id);
 }

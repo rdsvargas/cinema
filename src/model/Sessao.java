@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalTime;
+import util.DateUtil;
 
 /**
  *
@@ -161,7 +162,8 @@ public class Sessao {
 
     @Override
     public String toString() {
-        return "Sessao{" + "id=" + id + ", hora=" + hora + ", sala=" + sala + ", filme=" + filme + ", qtdAssentos=" + qtdAssentos + '}';
+        //return "Sessao{" + "id=" + id + ", hora=" + hora + ", sala=" + sala + ", filme=" + filme + ", qtdAssentos=" + qtdAssentos + '}';
+        return DateUtil.timeToString(this.hora) + " - " + this.getSala().getCodigo();
     }
     
 }

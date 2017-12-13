@@ -8,7 +8,7 @@ import java.util.List;
 import model.Filme;
 
 /**
- * 
+ *
  * @author Roger
  */
 public class FilmeDaoBd extends DaoBdMain<Filme> implements FilmeDao {
@@ -82,7 +82,7 @@ public class FilmeDaoBd extends DaoBdMain<Filme> implements FilmeDao {
 
             comando.executeUpdate();
         } catch (SQLException ex) {
-            System.err.println("Erro de Sistema - Problema ao atualizar paciente no Banco de Dados!");
+            System.err.println("Erro de Sistema - Problema ao atualizar filme no Banco de Dados!");
             throw new BDException(ex);
         } finally {
             this.fecharConexao();
@@ -112,7 +112,7 @@ public class FilmeDaoBd extends DaoBdMain<Filme> implements FilmeDao {
                 listaFilmes.add(filme);
             }
         } catch (SQLException ex) {
-            System.err.println("Erro de Sistema - Problema ao buscar os pacientes do Banco de Dados!");
+            System.err.println("Erro de Sistema - Problema ao buscar os filmes do Banco de Dados!");
             throw new BDException(ex);
         } finally {
             fecharConexao();
@@ -144,11 +144,42 @@ public class FilmeDaoBd extends DaoBdMain<Filme> implements FilmeDao {
                 throw new BDException("Filme não encontrada.");
             }
         } catch (SQLException ex) {
-            System.err.println("Erro de Sistema - Problema ao buscar os pacientes do Banco de Dados!");
+            System.err.println("Erro de Sistema - Problema ao buscar os filmes do Banco de Dados!");
             throw new BDException(ex);
         } finally {
             fecharConexao();
         }
         return filme;
+    }
+
+    @Override
+    public List<Filme> listaFilmeBySessao() {
+        List<Filme> listaFilmes = new ArrayList<>();
+
+        String sql = "SELECT filme.*"
+                + "     FROM filme"
+                + "    INNER JOIN (SELECT filme_id FROM sessao GROUP BY filme_id) fl"
+                + "       ON fl.filme_id = filme.filme_id"
+                + "    ORDER BY filme.filme_nome";
+
+        try {
+            conectar(sql);
+            ResultSet resultado = comando.executeQuery();
+            while (resultado.next()) {
+                int id = resultado.getInt("filme_id");
+                String nome = resultado.getString("filme_nome");
+                String genero = resultado.getString("filme_genero");
+                String sinopisa = resultado.getString("filme_sinopsia");
+
+                Filme filme = new Filme(id, nome, genero, sinopisa);
+                listaFilmes.add(filme);
+            }
+        } catch (SQLException ex) {
+            System.err.println("Erro de Sistema - Problema ao buscar os filmes do Banco de Dados!");
+            throw new BDException(ex);
+        } finally {
+            fecharConexao();
+        }
+        return listaFilmes;
     }
 }

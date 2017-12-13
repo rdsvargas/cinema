@@ -6,6 +6,7 @@
 package controller;
 
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -92,6 +93,7 @@ public class FXMLViewSessaoController implements Initializable {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
+
         if (root != null) {
             Stage dialogStage = new Stage();
             dialogStage.setScene(new Scene(root));

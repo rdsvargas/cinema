@@ -82,6 +82,7 @@ public class Sala {
     
     @Override
     public String toString() {
-        return "Sala{Id=" + this.id + ", Código Sala=" + this.codigo + ", Qtd Assentos=" + this.qtdAssentos + '}';
+        //return "Sala{Id=" + this.id + ", Código Sala=" + this.codigo + ", Qtd Assentos=" + this.qtdAssentos + '}';
+        return this.getCodigo();
     }
 }

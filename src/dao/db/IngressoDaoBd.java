@@ -19,18 +19,7 @@ import util.DateUtil;
  */
 public class IngressoDaoBd extends DaoBdMain<Ingresso> implements IngressoDao {
 
-    /**
-     *
-     * @param horario Horário da Sessao
-     * @param sala_id Identificador da Sala
-     * @return Saldo de Ingressos da Sessao
-     */
-    @Override
-    public int saldoIngressosPorSessaoeSala(LocalTime horario, int sala_id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    /**
+        /**
      *
      * @param ingresso Object Ingresso
      * @param qtd_vendido Quandidade de Ingressos vendidos
@@ -65,7 +54,19 @@ public class IngressoDaoBd extends DaoBdMain<Ingresso> implements IngressoDao {
      */
     @Override
     public void deletar(Ingresso ingresso) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            String sql = "DELETE FROM ingresso WHERE ingresso_id = ?";
+
+            conectar(sql);
+            comando.setInt(1, ingresso.getId());
+            comando.executeUpdate();
+            
+        } catch (SQLException ex) {
+            System.err.println("Erro de Sistema - Problema ao deletar ingresso no Banco de Dados!");
+            throw new BDException(ex);
+        } finally {
+            fecharConexao();
+        }
     }
 
     /**

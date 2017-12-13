@@ -71,6 +71,10 @@ public class FilmeNegocio {
         return filmeDao.listar();
     }
     
+    public List<Filme> listaFilmeBySessao(){
+        return filmeDao.listaFilmeBySessao();
+    }
+
     public List<String> listaFilme(){
         List<Filme> listaFilmes = filmeDao.listar();
         List<String> result = new ArrayList<>();

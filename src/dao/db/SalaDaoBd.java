@@ -96,7 +96,7 @@ public class SalaDaoBd extends DaoBdMain<Sala> implements SalaDao {
     public List<Sala> listar() {
         List<Sala> listaSalas = new ArrayList<>();
 
-        String sql = "SELECT * FROM sala";
+        String sql = "SELECT * FROM sala ORDER BY sala_codigo";
         try {
             conectar(sql);
             ResultSet resultado = comando.executeQuery();

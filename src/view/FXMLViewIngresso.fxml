@@ -6,15 +6,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <VBox fx:id="vboxIngresso" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLViewIngressoController">
    <children>
       <ToolBar prefHeight="40.0" prefWidth="200.0">
         <items>
-          <Button mnemonicParsing="false" text="Button" />
-            <Button mnemonicParsing="false" text="Button" />
-            <Button mnemonicParsing="false" text="Button" />
-            <Button mnemonicParsing="false" text="Button" />
+          <Button fx:id="btnVender" mnemonicParsing="false" onAction="#trataBotoes" text="Vender" />
+            <Button fx:id="btnRemover" mnemonicParsing="false" onAction="#trataBotoes" text="Remover" />
+            <Button fx:id="btnVoltar" mnemonicParsing="false" onAction="#trataBotoes" text="Voltar" />
         </items>
       </ToolBar>
       <TableView fx:id="tableViewIngresso" prefHeight="361.0" prefWidth="600.0">
