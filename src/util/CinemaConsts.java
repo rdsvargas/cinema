@@ -27,6 +27,9 @@ public class CinemaConsts {
     
     // Listas
     public static final String TITLE_LISTA_FILME = "Lista de Filmes";
+    public static final String TITLE_LISTA_SALA = "Lista de Salas";
+    public static final String TITLE_LISTA_SESSAO = "Lista de Sessões";
+    public static final String TITLE_LISTA_INGRESSO = "Lista de Ingressos";
     
     // Forms cadastro
     public static final String TITLE_FORM_FILME = "Filme";

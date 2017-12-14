@@ -6,8 +6,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLListaFilmeController">
+<AnchorPane id="AnchorPane" fx:id="painelListaFilme" prefHeight="500.0" prefWidth="934.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLListaFilmeController">
    <children>
-      <TextArea fx:id="textAreaFilme" layoutX="-20.0" prefHeight="500.0" prefWidth="942.0" />
+      <TextArea fx:id="textAreaFilme" prefHeight="500.0" prefWidth="941.0" />
    </children>
 </AnchorPane>

@@ -51,7 +51,8 @@ public class FXMLMainController implements Initializable {
     private MenuItem mnuLstSalas;
     @FXML
     private MenuItem mnuLstSessoes;
-    
+    @FXML
+    private MenuItem mnuLstIngressos;
     @FXML
     private void handleButtonAction(ActionEvent event) throws IOException {
         String title = "";
@@ -72,7 +73,12 @@ public class FXMLMainController implements Initializable {
             root = FXMLLoader.load(this.getClass().getResource("/view/FXMLListaFilme.fxml"));
             title = CinemaConsts.TITLE_LISTA_FILME;
         } else if (event.getSource().equals(mnuLstSalas)){
+            root = FXMLLoader.load(this.getClass().getResource("/view/FXMLListaSala.fxml"));
+            title = CinemaConsts.TITLE_LISTA_SALA;
         } else if (event.getSource().equals(mnuLstSessoes)){
+        } else if (event.getSource().equals(mnuLstIngressos)){
+            root = FXMLLoader.load(this.getClass().getResource("/view/FXMLListaIngresso.fxml"));
+            title = CinemaConsts.TITLE_LISTA_SALA;
         } else if (event.getSource().equals(mnuClose)) {
             System.exit(0);
         }

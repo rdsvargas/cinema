@@ -24,6 +24,7 @@
               <MenuItem fx:id="mnuLstFilmes" mnemonicParsing="false" onAction="#handleButtonAction" text="Lista Filmes" />
                   <MenuItem fx:id="mnuLstSalas" mnemonicParsing="false" onAction="#handleButtonAction" text="Lista Salas" />
                   <MenuItem fx:id="mnuLstSessoes" mnemonicParsing="false" onAction="#handleButtonAction" text="Lista Sessões" />
+                  <MenuItem fx:id="mnuLstIngressos" mnemonicParsing="false" onAction="#handleButtonAction" text="Lista Ingressos" />
             </items>
           </Menu>
         </menus>

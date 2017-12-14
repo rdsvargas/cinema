@@ -115,6 +115,5 @@ public class SalaUI {
         return String.format("%-10s", String.join("", Collections.nCopies(10, "-")))
                 + String.format("%-11s", "+" + String.join("", Collections.nCopies(10, "-")))
                 + String.format("%-12s", "+" + String.join("", Collections.nCopies(12, "-")));
-
     }
 }
