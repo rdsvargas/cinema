@@ -27,6 +27,7 @@ import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import model.Sessao;
 import negocio.SessaoNegocio;
+import util.CinemaConsts;
 
 /**
  * FXML Controller class
@@ -95,11 +96,12 @@ public class FXMLViewSessaoController implements Initializable {
         }
 
         if (root != null) {
-            Stage dialogStage = new Stage();
-            dialogStage.setScene(new Scene(root));
-            dialogStage.initModality(Modality.APPLICATION_MODAL);
-            dialogStage.initOwner(vboxSessao.getScene().getWindow());
-            dialogStage.showAndWait();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle(CinemaConsts.TITLE_FORM_SESSAO);
+            stage.initOwner(vboxSessao.getScene().getWindow());
+            stage.showAndWait();
         }
         carregarTableViewSessoes();
     }

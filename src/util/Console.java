@@ -103,14 +103,20 @@ public class Console {
         return (scanner.next().charAt(0));
     }
 
-    public static String formatString(Object out, int size){
+    public static String formatString(Object out, int size) {
         String result = "";
-        if (out instanceof Integer){
+        if (out instanceof Integer) {
             result = String.valueOf(out);
+        } else {
+            result = (String) out;
         }
-        
-        while(result.length()<size){
-            result = " " + result;
+
+        if (result.length() > size) {
+            result = result.substring(0, size);
+        } else {
+            while (result.length() < size) {
+                result = result + " ";
+            }
         }
         return result;
     }

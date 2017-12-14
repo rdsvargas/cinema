@@ -31,7 +31,7 @@ public class MainUI {
      * @throws ValidaDataException
      */
     
-    public void executar() throws ValidaDataException {
+    public void executar() throws ValidaDataException, Exception {
         int opcao = 0;
         do {
 

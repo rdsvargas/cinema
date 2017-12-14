@@ -26,6 +26,7 @@ import negocio.SalaNegocio;
 import negocio.SessaoNegocio;
 import util.Console;
 import util.DateUtil;
+import view.UIUtil;
 
 /**
  * FXML Controller class
@@ -47,7 +48,7 @@ public class FXMLSessaoController implements Initializable {
     private ComboBox<Sala> cbSala;
     @FXML
     private Button btnSalvar;
-    
+
     private SessaoNegocio sessaoNegocio;
     private FilmeNegocio filmeNegocio;
     private SalaNegocio salaNegocio;
@@ -57,8 +58,8 @@ public class FXMLSessaoController implements Initializable {
     private void handleButtonAction(ActionEvent event) throws Exception {
         Stage stage = (Stage) painelSessao.getScene().getWindow();
         boolean exitForm = true;
-        if (event.getSource().equals(btnSalvar)) {
-            try {
+        try {
+            if (event.getSource().equals(btnSalvar)) {
                 LocalTime horaSessao = DateUtil.stringToTime(textFieldSessao.getText());
 
                 sessaoNegocio = new SessaoNegocio();
@@ -75,15 +76,15 @@ public class FXMLSessaoController implements Initializable {
                     this.sessaoSel.setSala(sala);
                     sessaoNegocio.atualizar(this.sessaoSel);
                 }
-            } catch (DateTimeParseException ex) {
-                JOptionPane.showMessageDialog(null, "Informar formato 24h ex: 13:00", "Alerta", JOptionPane.INFORMATION_MESSAGE);
-                textFieldSessao.requestFocus();
-                exitForm = false;
-            } catch (Exception ex){
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Alerta", JOptionPane.INFORMATION_MESSAGE);
-                textFieldSessao.requestFocus();
-                exitForm = false;
             }
+        } catch (DateTimeParseException ex) {
+            UIUtil.exibeErro("Informar formato 24h ex: 13:00", JOptionPane.INFORMATION_MESSAGE);
+            textFieldSessao.requestFocus();
+            exitForm = false;
+        } catch (Exception ex) {
+            UIUtil.exibeErro(ex.getMessage(), JOptionPane.INFORMATION_MESSAGE);
+            textFieldSessao.requestFocus();
+            exitForm = false;
         }
         if (exitForm) {
             stage.close();
@@ -120,4 +121,3 @@ public class FXMLSessaoController implements Initializable {
         cbSala.getSelectionModel().select(0);
     }
 }
-

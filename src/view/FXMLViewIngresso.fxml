@@ -17,10 +17,10 @@
       </ToolBar>
       <TableView fx:id="tableViewIngresso" prefHeight="361.0" prefWidth="600.0">
         <columns>
-          <TableColumn fx:id="tableColumnQtdIngresso" prefWidth="75.0" text="Qtd Ingressos" />
-          <TableColumn fx:id="tableColumnSessao" prefWidth="97.0" text="Sessao" />
-            <TableColumn fx:id="tableColumnSala" prefWidth="152.0" text="Sala" />
-            <TableColumn fx:id="tableColumnFilme" prefWidth="271.0" text="Filme" />
+          <TableColumn fx:id="tableColumnQtdIngresso" prefWidth="96.0" text="Qtd Ingressos" />
+          <TableColumn fx:id="tableColumnSessao" prefWidth="87.0" text="Sessao" />
+            <TableColumn fx:id="tableColumnSala" prefWidth="111.0" text="Sala" />
+            <TableColumn fx:id="tableColumnFilme" prefWidth="301.0" text="Filme" />
         </columns>
       </TableView>
    </children>

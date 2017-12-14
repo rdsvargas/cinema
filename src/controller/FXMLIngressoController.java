@@ -59,14 +59,14 @@ public class FXMLIngressoController implements Initializable {
             try {
                 Sessao sessao = cbSessao.getSelectionModel().getSelectedItem();
                 int qtdIngressos = Integer.parseInt(textFieldQtdIngressos.getText());
-                int saldo = sessao.getSala().getQtdAssentos() - sessao.getIngressos_vendidos();
-                
-                if (qtdIngressos == 0){
-                    throw new NumberFormatException();
-                }
-                if ( qtdIngressos > saldo){
-                    throw new Exception("Saldo insuficiente.");
-                }
+//                int saldo = sessao.getSala().getQtdAssentos() - sessao.getIngressos_vendidos();
+//                
+//                if (qtdIngressos == 0){
+//                    throw new NumberFormatException();
+//                }
+//                if ( qtdIngressos > saldo){
+//                    throw new Exception("Saldo insuficiente.");
+//                }
                 
                 Ingresso ingresso = new Ingresso(sessao, qtdIngressos);
                 ingressoNegocio.salvar(ingresso, ingresso.getQtdIngresso());

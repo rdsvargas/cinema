@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="vboxFilme" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="773.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLViewFilmeController">
+<VBox fx:id="vboxFilme" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLViewFilmeController">
    <children>
       <ToolBar prefHeight="42.0" prefWidth="684.0">
         <items>
@@ -16,11 +16,11 @@
             <Button fx:id="btnVoltar" mnemonicParsing="false" onAction="#trataBotoes" text="Voltar" />
         </items>
       </ToolBar>
-      <TableView fx:id="tableViewFilmes" prefHeight="445.0" prefWidth="889.0">
+      <TableView fx:id="tableViewFilmes" prefHeight="454.0" prefWidth="883.0">
         <columns>
-          <TableColumn fx:id="tableColumnFilme" prefWidth="271.0" text="Filme" />
-          <TableColumn fx:id="tableColumnGenero" prefWidth="268.0" text="Gênero" />
-            <TableColumn fx:id="tableColumnSinopsia" prefWidth="231.0" text="Sinópsia" />
+          <TableColumn fx:id="tableColumnFilme" prefWidth="239.0" text="Filme" />
+          <TableColumn fx:id="tableColumnGenero" prefWidth="225.0" text="Gênero" />
+            <TableColumn fx:id="tableColumnSinopsia" prefWidth="434.0" text="Sinópsia" />
         </columns>
       </TableView>
    </children>

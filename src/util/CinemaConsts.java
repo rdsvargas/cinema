@@ -20,11 +20,17 @@ public class CinemaConsts {
     public static final String TITLE_MNU_INGRESSO = "Menu Ingresso";
     
     // Cadastro
-    public static final String TITLE_CADASTRO_FILME = "Cadastrar Filme";
-    public static final String TITLE_CADASTRO_SALA = "Cadastrar Sala";
-    public static final String TITLE_CADASTRO_SESSAO = "Cadastrar Sessão";
+    public static final String TITLE_CADASTRO_FILME = "Cadastro Filme";
+    public static final String TITLE_CADASTRO_SALA = "Cadasto Sala";
+    public static final String TITLE_CADASTRO_SESSAO = "Cadastro Sessão";
     public static final String TITLE_VENDA_INGRESSO = "Venda Ingressos";
     
     // Listas
     public static final String TITLE_LISTA_FILME = "Lista de Filmes";
+    
+    // Forms cadastro
+    public static final String TITLE_FORM_FILME = "Filme";
+    public static final String TITLE_FORM_SALA = "Sala";
+    public static final String TITLE_FORM_SESSAO = "Sessão";
+    public static final String TITLE_FORM_INGRESSO = "Ingresso";
 }

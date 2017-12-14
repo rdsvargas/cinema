@@ -29,8 +29,16 @@ public class IngressoNegocio {
      *
      * @param ingresso
      * @param qtd_vendido
+     * @throws java.lang.Exception
      */
-    public void salvar(Ingresso ingresso, int qtd_vendido) {
+    public void salvar(Ingresso ingresso, int qtd_vendido) throws Exception {
+        if (qtd_vendido == 0) {
+            throw new NumberFormatException();
+        }
+        int saldo = ingresso.getSessao().getSala().getQtdAssentos() - ingresso.getSessao().getIngressos_vendidos();
+        if (qtd_vendido > saldo) {
+            throw new Exception("Saldo insuficiente.");
+        }
         this.ingressoDao.salvar(ingresso, qtd_vendido);
     }
 
@@ -40,13 +48,13 @@ public class IngressoNegocio {
      */
     public List<Ingresso> listar() {
         return this.ingressoDao.listar();
-    }   
-    
+    }
+
     public List<Ingresso> listaTableView() {
         return this.ingressoDao.listaTableView();
-    }   
-    
-    public void deletar(Ingresso ingresso){
+    }
+
+    public void deletar(Ingresso ingresso) {
         this.ingressoDao.deletar(ingresso);
     }
 }

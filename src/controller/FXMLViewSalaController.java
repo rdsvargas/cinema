@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import model.Sala;
 import negocio.SalaNegocio;
+import util.CinemaConsts;
 
 /**
  * FXML Controller class
@@ -92,11 +93,12 @@ public class FXMLViewSalaController implements Initializable {
         }
         
         if (root != null) {
-            Stage dialogStage = new Stage();
-            dialogStage.setScene(new Scene(root));
-            dialogStage.initModality(Modality.APPLICATION_MODAL);
-            dialogStage.initOwner(vboxSala.getScene().getWindow());
-            dialogStage.showAndWait();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle(CinemaConsts.TITLE_FORM_SALA);
+            stage.initOwner(vboxSala.getScene().getWindow());
+            stage.showAndWait();
         }
         carregarTableViewSalas();
     }

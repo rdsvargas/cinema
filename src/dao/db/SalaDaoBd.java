@@ -77,9 +77,9 @@ public class SalaDaoBd extends DaoBdMain<Sala> implements SalaDao {
             comando.setString(1, sala.getCodigo());
             comando.setInt(2, sala.getQtdAssentos());
             comando.setInt(3, sala.getId());
-            
+
             comando.executeUpdate();
-            
+
         } catch (SQLException ex) {
             System.err.println("Erro de Sistema - Problema ao atualizar a Sala no Banco de Dados!");
             throw new BDException(ex);
@@ -122,20 +122,22 @@ public class SalaDaoBd extends DaoBdMain<Sala> implements SalaDao {
      * @return Object Sala
      */
     @Override
-    public Sala localizarPorCodigo(String codigo) {
+    public Sala localizarPorCodigo(String codigo, boolean upException) {
         Sala sala = null;
-        try{
-            String sql ="SELECT * FROM sala WHERE UPPER(sala_codigo) = UPPER(?)";
+        try {
+            String sql = "SELECT * FROM sala WHERE UPPER(sala_codigo) = UPPER(?)";
             conectar(sql);
             comando.setString(1, codigo);
             ResultSet resultado = comando.executeQuery();
 
-            if (resultado.next()){
+            if (resultado.next()) {
                 sala = new Sala(resultado.getInt("sala_id"),
                         resultado.getString("sala_codigo"),
                         resultado.getInt("sala_qtd_assentos"));
             } else {
-                throw new BDException("Sala não encontrada.");
+                if (upException) {
+                    throw new BDException("Sala não encontrada.");
+                }
             }
         } catch (SQLException ex) {
             System.err.println("Erro de Sistema - Problema ao buscar a sala do Banco de Dados!");
@@ -154,13 +156,13 @@ public class SalaDaoBd extends DaoBdMain<Sala> implements SalaDao {
     @Override
     public Sala localizarPorId(int id) {
         Sala sala = null;
-        try{
-            String sql ="SELECT * FROM sala WHERE sala_id = ?";
+        try {
+            String sql = "SELECT * FROM sala WHERE sala_id = ?";
             conectar(sql);
             comando.setInt(1, id);
             ResultSet resultado = comando.executeQuery();
 
-            if (resultado.next()){
+            if (resultado.next()) {
                 sala = new Sala(resultado.getInt("sala_id"),
                         resultado.getString("sala_codigo"),
                         resultado.getInt("sala_qtd_assentos"));

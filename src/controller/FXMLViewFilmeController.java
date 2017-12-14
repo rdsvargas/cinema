@@ -28,6 +28,7 @@ import javax.swing.JOptionPane;
 import model.Filme;
 import negocio.FilmeNegocio;
 import util.ValidaDataException;
+import util.CinemaConsts;
 
 /**
  *
@@ -62,7 +63,6 @@ public class FXMLViewFilmeController implements Initializable {
 
     @FXML
     private void trataBotoes(ActionEvent event) throws ValidaDataException, IOException {
-        String title = "";
         Parent root = null;
         try {
             if (event.getSource().equals(btnCadastrar)) {
@@ -91,11 +91,12 @@ public class FXMLViewFilmeController implements Initializable {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
         if (root != null) {
-            Stage dialogStage = new Stage();
-            dialogStage.setScene(new Scene(root));
-            dialogStage.initModality(Modality.APPLICATION_MODAL);
-            dialogStage.initOwner(vboxFilme.getScene().getWindow());
-            dialogStage.showAndWait();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(vboxFilme.getScene().getWindow());
+            stage.setTitle(CinemaConsts.TITLE_FORM_FILME);
+            stage.showAndWait();
         }
         carregarTableViewFilmes();
     }

@@ -12,12 +12,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 import model.Filme;
 import negocio.FilmeNegocio;
 import util.ValidaDataException;
+import view.UIUtil;
 
 /**
  *
@@ -36,7 +39,7 @@ public class FXMLFilmeController implements Initializable {
     @FXML
     private TextField textGenero;
     @FXML
-    private TextField textSinopsia;
+    private TextArea textSinopsia;
 
     private FilmeNegocio filmeNegocio;
     private Filme filmeSel;
@@ -44,21 +47,29 @@ public class FXMLFilmeController implements Initializable {
     @FXML
     private void handleButtonAction(ActionEvent event) throws ValidaDataException, IOException {
         Stage stage = (Stage) painelFilme.getScene().getWindow();
-
-        if (event.getSource().equals(btnSalvar)) {
-            filmeNegocio = new FilmeNegocio();
-            if (this.filmeSel == null) {
-                filmeNegocio.salvar(new Filme(textFilme.getText(),
-                        textGenero.getText(),
-                        textSinopsia.getText()));
-            } else{
-                filmeSel.setNome(textFilme.getText());
-                filmeSel.setGenero(textGenero.getText());
-                filmeSel.setSinopsia(textSinopsia.getText());
-                filmeNegocio.atualizar(filmeSel);
+        boolean exitForm = true;
+        try {
+            if (event.getSource().equals(btnSalvar)) {
+                filmeNegocio = new FilmeNegocio();
+                if (this.filmeSel == null) {
+                    filmeNegocio.salvar(new Filme(textFilme.getText(),
+                            textGenero.getText(),
+                            textSinopsia.getText()));
+                } else {
+                    filmeSel.setNome(textFilme.getText());
+                    filmeSel.setGenero(textGenero.getText());
+                    filmeSel.setSinopsia(textSinopsia.getText());
+                    filmeNegocio.atualizar(filmeSel);
+                }
             }
+        } catch (Exception ex) {
+            UIUtil.exibeErro(ex.getMessage(), JOptionPane.INFORMATION_MESSAGE);
+            exitForm = false;
         }
-        stage.close();
+
+        if (exitForm) {
+            stage.close();
+        }
     }
 
     @Override

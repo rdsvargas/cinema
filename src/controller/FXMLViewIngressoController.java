@@ -27,6 +27,7 @@ import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import model.Ingresso;
 import negocio.IngressoNegocio;
+import util.CinemaConsts;
 
 /**
  * FXML Controller class
@@ -84,11 +85,12 @@ public class FXMLViewIngressoController implements Initializable {
         }
 
         if (root != null) {
-            Stage dialogStage = new Stage();
-            dialogStage.setScene(new Scene(root));
-            dialogStage.initModality(Modality.APPLICATION_MODAL);
-            dialogStage.initOwner(vboxIngresso.getScene().getWindow());
-            dialogStage.showAndWait();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(vboxIngresso.getScene().getWindow());
+            stage.setTitle(CinemaConsts.TITLE_FORM_INGRESSO);
+            stage.showAndWait();
         }
         carregarTableViewIngresso();
     }

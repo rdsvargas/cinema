@@ -258,11 +258,6 @@ public class SessaoDaoBd extends DaoBdMain<Sessao> implements SessaoDao {
     public List<Sessao> listaSessaoByFilme(int filme_id) {
         List<Sessao> listaSessoes = new ArrayList<>();
         try {
-//            String sql = "SELECT sessao.*"
-//                    + "     FROM sessao"
-//                    + "    INNER JOIN sala ON sala.sala_id = sessao.sala_id"
-//                    + "    WHERE sessao.filme_id = ?"
-//                    + "    ORDER BY sessao.sessao_hora";
             String sql = "SELECT sessao.*,"
                     + "          sala.sala_qtd_assentos,"
                     + "          ing.ingressos_vendidos,"

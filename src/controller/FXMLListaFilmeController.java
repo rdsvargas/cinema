@@ -14,6 +14,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.text.Font;
 import model.Filme;
 import negocio.FilmeNegocio;
+import util.Console;
 
 /**
  * FXML Controller class
@@ -38,18 +39,18 @@ public class FXMLListaFilmeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         StringBuilder sbFilmes = new StringBuilder();
-        sbFilmes.append(String.format("%-10s", "Código")
+        sbFilmes.append(String.format("%-7s", "Código")
                 + String.format("%-31s", "|FILME")
-                + String.format("%-21s", "|GÊNERO")
-                + String.format("%-51s", "|SINÓPSIA")+"\n");
+                + String.format("%-31s", "|GÊNERO")
+                + String.format("%-71s", "|SINÓPSIA")+"\n");
 
             for (Filme filme : filmeNegocio.listar()) {
                 sbFilmes.append(this.linhaSeparadora());
 
-                sbFilmes.append(String.format("%-10s", filme.getId())
-                        + String.format("%-31s", "|" + filme.getNome())
-                        + String.format("%-21s", "|" + filme.getGenero())
-                        + String.format("%-51s", "|" + filme.getSinopsia()) +"\n");
+                sbFilmes.append(String.format("%-7s", filme.getId())
+                        + String.format("%-31s", "|" + Console.formatString(filme.getNome(), 30))
+                        + String.format("%-31s", "|" + Console.formatString(filme.getGenero(), 30))
+                        + String.format("%-71s", "|" + Console.formatString(filme.getSinopsia(), 69)) +"\n");
             }
             sbFilmes.append(this.linhaSeparadora());
         this.textAreaFilme.setText(sbFilmes.toString());
@@ -59,10 +60,10 @@ public class FXMLListaFilmeController implements Initializable {
     }
 
     private String linhaSeparadora() {
-        return (String.format("%-10s", String.join("", Collections.nCopies(10, "-")))
+        return (String.format("%-7s", String.join("", Collections.nCopies(7, "-")))
                 + String.format("%-31s", "+" + String.join("", Collections.nCopies(29, "-")))
-                + String.format("%-21s", "+" + String.join("", Collections.nCopies(19, "-")))
-                + String.format("%-51s", "+" + String.join("", Collections.nCopies(49, "-"))) + "\n");
+                + String.format("%-31s", "+" + String.join("", Collections.nCopies(29, "-")))
+                + String.format("%-71s", "+" + String.join("", Collections.nCopies(69, "-"))) + "\n");
     }
 
 }

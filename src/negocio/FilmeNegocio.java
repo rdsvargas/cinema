@@ -31,9 +31,7 @@ public class FilmeNegocio {
      */
     public void salvar(Filme filme) throws ValidaDataException {
         // validação dos dados informados
-        ValidaDados.validaEntrada(filme.getNome(), "Nome do Filme", 30);
-        ValidaDados.validaEntrada(filme.getGenero(), "Gênero", 20);
-        ValidaDados.validaEntrada(filme.getSinopsia(), "Sinópsia", 50);
+        this.validacoes(filme);
         this.filmeDao.salvar(filme);
     }
 
@@ -44,10 +42,14 @@ public class FilmeNegocio {
      */
     public void atualizar(Filme filme) throws ValidaDataException {
         // validação dos dados informados
-        ValidaDados.validaEntrada(filme.getNome(), "Nome do Filme", 30);
-        ValidaDados.validaEntrada(filme.getGenero(), "Gênero", 20);
-        ValidaDados.validaEntrada(filme.getSinopsia(), "Sinópsia", 50);
+        this.validacoes(filme);
         this.filmeDao.atualizar(filme);
+    }
+    
+    public void validacoes(Filme filme) throws ValidaDataException{
+        ValidaDados.validaEntrada(filme.getNome(), "Nome do Filme", 50);
+        ValidaDados.validaEntrada(filme.getGenero(), "Gênero", 70);
+        ValidaDados.validaEntrada(filme.getSinopsia(), "Sinópsia", 200);
     }
     
     public void deletar(Filme filme){
@@ -75,13 +77,13 @@ public class FilmeNegocio {
         return filmeDao.listaFilmeBySessao();
     }
 
-    public List<String> listaFilme(){
-        List<Filme> listaFilmes = filmeDao.listar();
-        List<String> result = new ArrayList<>();
-        for (Filme filme : listaFilmes){
-            result.add(Console.formatString(filme.getId(), 5) + " | " + filme.getNome());
-        }
-        return result;
-    }
+//    public List<String> listaFilme(){
+//        List<Filme> listaFilmes = filmeDao.listar();
+//        List<String> result = new ArrayList<>();
+//        for (Filme filme : listaFilmes){
+//            result.add(Console.formatString(filme.getId(), 5) + " | " + filme.getNome());
+//        }
+//        return result;
+//    }
     
 }

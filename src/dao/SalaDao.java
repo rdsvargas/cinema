@@ -11,9 +11,10 @@ public interface SalaDao extends DaoMain<Sala>{
     /**
      *
      * @param codigo Codigo da sala
+     * @param upException
      * @return Object Sala
      */
-    public Sala localizarPorCodigo(String codigo);
+    public Sala localizarPorCodigo(String codigo, boolean upException);
 
     /**
      *

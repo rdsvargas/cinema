@@ -9,9 +9,9 @@ CREATE DATABASE lp2_crudcinema
 CREATE TABLE filme
 (
   filme_id serial NOT NULL,
-  filme_nome character varying(30),
-  filme_genero character varying(20),
-  filme_sinopsia character varying(50),
+  filme_nome character varying(50),
+  filme_genero character varying(70),
+  filme_sinopsia character varying(200),
   primary key (filme_id)
 );
  

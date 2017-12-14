@@ -32,7 +32,6 @@ public class SessaoNegocio {
         } else {
             throw new Exception("Sessão já cadastrada");
         }
-
     }
 
     /**

@@ -27,7 +27,7 @@ public class SalaUI {
     /**
      *
      */
-    public void executar() {
+    public void executar() throws Exception {
         int opcao = 0;
         do {
             System.out.println(SalaMenu.getOpcoes());
@@ -50,7 +50,7 @@ public class SalaUI {
         } while (opcao != SalaMenu.OP_VOLTAR);
     }
 
-    private void cadastrarSala() {
+    private void cadastrarSala() throws Exception {
         String codigo = Console.scanString("Identificação Sala: ");
         int qtdAssentos = Console.scanInt("Quantidade de Assentos: ");
         if (qtdAssentos == -1) {
@@ -66,7 +66,7 @@ public class SalaUI {
         }
     }
 
-    private void alterarSala() {
+    private void alterarSala() throws Exception {
         String codigo = Console.scanString("Informe o código da Sala: ");
         try {
             Sala sala = salaNegocio.localizarPorCodigo(codigo);
