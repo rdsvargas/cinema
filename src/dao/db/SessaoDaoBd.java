@@ -273,7 +273,8 @@ public class SessaoDaoBd extends DaoBdMain<Sessao> implements SessaoDao {
                     + "     LEFT JOIN (SELECT SUM(ingresso_qtd) ingressos_vendidos, sessao_id"
                     + "                  FROM ingresso"
                     + "                 GROUP BY sessao_id) ing on ing.sessao_id = sessao.sessao_id"
-                    + "    WHERE sessao.filme_id = ?";
+                    + "    WHERE sessao.filme_id = ?"
+                    + "    ORDER BY sessao.sessao_hora, sala.sala_codigo";
 
             conectar(sql);
             comando.setInt(1, filme_id);

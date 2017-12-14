@@ -12,11 +12,9 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Senac/NetBeans/2017_2/Cinema/src/controller/FXMLMainController.java</file>
-            <file>file:/E:/Senac/NetBeans/2017_2/Cinema/src/controller/FXMLListaSalaController.java</file>
-            <file>file:/E:/Senac/NetBeans/2017_2/Cinema/src/controller/FXMLListaFilmeController.java</file>
-            <file>file:/E:/Senac/NetBeans/2017_2/Cinema/src/view/SalaUI.java</file>
-            <file>file:/E:/Senac/NetBeans/2017_2/Cinema/src/util/CinemaConsts.java</file>
+            <file>file:/E:/Senac/NetBeans/2017_2/Cinema/src/negocio/SessaoNegocio.java</file>
+            <file>file:/E:/Senac/NetBeans/2017_2/Cinema/src/controller/FXMLListaIngressoController.java</file>
+            <file>file:/E:/Senac/NetBeans/2017_2/Cinema/src/negocio/SalaNegocio.java</file>
         </group>
     </open-files>
 </project-private>
